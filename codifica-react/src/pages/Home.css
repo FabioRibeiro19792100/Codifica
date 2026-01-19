@@ -1,0 +1,621 @@
+/* Estilo minimalista inspirado no techhall */
+
+.home-page {
+  min-height: 100vh;
+  background-color: hsl(35, 25%, 92%);
+  color: hsl(0, 0%, 5%);
+  position: relative;
+  padding: 0;
+  padding-top: 73px; /* Space for fixed navigation */
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+}
+
+/* Scroll offset para seções com IDs */
+section[id] {
+  scroll-margin-top: 100px;
+}
+
+/* Linhas verticais sutis no background - apenas uma camada */
+.home-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 99px,
+    rgba(0, 0, 0, 0.06) 99px,
+    rgba(0, 0, 0, 0.06) 100px
+  );
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  padding: 0 24px;
+  width: 100%;
+  flex: 1;
+}
+
+/* Hero unificado - 100vh dividido em 50% esquerda (título) e 50% direita (descritivo) */
+.home-hero {
+  height: calc(100vh - 73px); /* 100vh menos altura do nav */
+  display: flex;
+  flex-direction: row; /* Esquerda/direita */
+  border: none;
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  background-color: hsl(35, 25%, 92%);
+}
+
+.hero-title-section {
+  width: 50%; /* 50% esquerda */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+.hero-content-section {
+  width: 50%; /* 50% direita */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: none;
+  margin: 0;
+  padding: 0 26px 0 24px;
+  position: relative;
+  z-index: 10;
+}
+
+
+.home-title {
+  font-size: 3.75rem;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25em;
+  text-transform: lowercase;
+  line-height: 0.9;
+}
+
+@media (min-width: 768px) {
+  .home-title {
+    font-size: 8rem;
+  }
+}
+
+.home-subtitle {
+  font-size: 3.75rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+  margin-top: 0;
+  text-transform: lowercase;
+  line-height: 0.9;
+}
+
+@media (min-width: 768px) {
+  .home-subtitle {
+    font-size: 8rem;
+  }
+}
+
+.home-version {
+  font-size: 1rem;
+  color: hsl(0, 0%, 35%);
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .home-version {
+    font-size: 1.25rem;
+  }
+}
+
+.hero-content-section > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Flow section page - Layer 2 */
+.flow-section-page {
+  padding: 48px 0;
+  border: none;
+  position: relative;
+  overflow: visible;
+  background-color: white;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+@media (min-width: 768px) {
+  .flow-section-page {
+    padding: 64px 0;
+  }
+}
+
+.flow-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.flow-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .flow-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+}
+
+.flow-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .flow-column {
+    padding: 2rem;
+  }
+}
+
+.flow-icon-wrapper {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.flow-icon {
+  color: hsl(0, 0%, 5%);
+  width: 48px;
+  height: 48px;
+}
+
+@media (min-width: 768px) {
+  .flow-icon {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.flow-column-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: hsl(0, 0%, 5%);
+  text-transform: lowercase;
+}
+
+@media (min-width: 768px) {
+  .flow-column-title {
+    font-size: 1.5rem;
+  }
+}
+
+.flow-column-text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  font-weight: 300;
+  color: hsl(0, 0%, 35%);
+}
+
+@media (min-width: 768px) {
+  .flow-column-text {
+    font-size: 1rem;
+  }
+}
+
+/* Seções sem bordas */
+.pages-section {
+  padding: 48px 0;
+  border: none;
+  position: relative;
+  overflow: visible;
+  background-color: hsl(35, 25%, 92%);
+}
+
+.stats-section {
+  padding: 48px 0;
+  border: none;
+  position: relative;
+  overflow: visible;
+}
+
+.info-section {
+  padding: 48px 0;
+  border: none;
+  position: relative;
+  overflow: visible;
+  background-color: white;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.info-section .container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+
+@media (min-width: 768px) {
+  .pages-section,
+  .stats-section,
+  .info-section {
+    padding: 64px 0;
+  }
+}
+
+/* Info grid - 2 colunas */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+}
+
+.intro-text {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .intro-text {
+    font-size: 1.65rem;
+  }
+}
+
+
+/* Grid de páginas - estilo minimalista */
+.pages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .pages-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4rem;
+    align-items: stretch;
+  }
+}
+
+.page-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  position: relative;
+}
+
+.page-item > * + * {
+  margin-top: 1.5rem;
+}
+
+.page-link {
+  display: block;
+  color: hsl(0, 0%, 5%);
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+  padding: 40px;
+  position: relative;
+  cursor: pointer;
+  z-index: 100;
+  background-color: hsl(35, 20%, 85%);
+  border: none;
+  height: 100%;
+  min-height: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+.page-link:hover {
+  background-color: hsl(35, 15%, 75%);
+}
+
+.page-link::after {
+  content: '→';
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.page-link:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-transform: lowercase;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 3rem;
+  }
+}
+
+.page-badge-text {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: inline-block;
+  padding: 4px 12px;
+  background: black;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .page-badge-text {
+    font-size: 0.875rem;
+  }
+}
+
+.page-badge-text.private {
+  background: #ff9800;
+}
+
+.page-description {
+  font-size: 1rem;
+  color: hsl(0, 0%, 35%);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  font-weight: normal;
+}
+
+@media (min-width: 768px) {
+  .page-description {
+    font-size: 1.125rem;
+  }
+}
+
+.page-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-features > * + * {
+  margin-top: 0.5rem;
+}
+
+.page-features li {
+  font-size: 0.875rem;
+  color: hsl(0, 0%, 35%);
+  line-height: 1.75;
+  padding-left: 20px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .page-features li {
+    font-size: 1rem;
+  }
+}
+
+.page-features li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: black;
+  font-weight: bold;
+}
+
+/* Stats section */
+.home-page .section-title {
+  font-size: 2.25rem !important;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 2rem;
+  text-transform: lowercase;
+  color: hsl(0, 0%, 5%);
+}
+
+@media (min-width: 768px) {
+  .home-page .section-title {
+    font-size: 3rem !important;
+    margin-bottom: 3rem;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem;
+  }
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-item > * + * {
+  margin-top: 1rem;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .stat-number {
+    font-size: 4.5rem;
+  }
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: hsl(0, 0%, 35%);
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .stat-label {
+    font-size: 1.125rem;
+  }
+}
+
+
+
+.info-box {
+  max-width: 100%;
+  margin: 0;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.info-box > * + * {
+  margin-top: 1.5rem;
+}
+
+.info-box.warning {
+  background-color: hsl(35, 20%, 85%);
+  padding: 2rem;
+  border: none;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.info-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-transform: lowercase;
+}
+
+@media (min-width: 768px) {
+  .info-title {
+    font-size: 1.575rem;
+  }
+}
+
+.info-list {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+
+.info-list > * + * {
+  margin-top: 1rem;
+}
+
+.info-list li {
+  font-size: 0.7875rem;
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .info-list li {
+    font-size: 0.875rem;
+  }
+}
+
+.info-text {
+  font-size: 0.7875rem;
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .info-text {
+    font-size: 0.875rem;
+  }
+}
+
+/* Footer */
+.home-footer {
+  padding: 48px 0;
+  border: none;
+  text-align: left;
+  position: relative;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .home-footer {
+    padding: 64px 0;
+  }
+}
+
+.home-footer p {
+  font-size: 0.875rem;
+  color: hsl(0, 0%, 35%);
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .home-footer p {
+    font-size: 1rem;
+  }
+}

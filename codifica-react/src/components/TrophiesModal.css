@@ -1,0 +1,115 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.modal-content {
+  background-color: hsl(35, 25%, 92%);
+  color: hsl(0, 0%, 5%);
+  max-width: 1200px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-header {
+  padding: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin: 0;
+  text-transform: lowercase;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: hsl(0, 0%, 5%);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.modal-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+  padding: 32px;
+}
+
+.trophies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.trophy-item {
+  background-color: hsl(35, 20%, 85%);
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.trophy-icon-wrapper {
+  flex-shrink: 0;
+  color: hsl(0, 0%, 5%);
+}
+
+.trophy-info {
+  flex: 1;
+}
+
+.trophy-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+  margin-bottom: 8px;
+}
+
+.trophy-description {
+  font-size: 0.875rem;
+  color: hsl(0, 0%, 35%);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.trophy-criteria {
+  font-size: 0.875rem;
+  color: hsl(0, 0%, 5%);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.no-trophies {
+  text-align: center;
+  padding: 48px;
+  color: hsl(0, 0%, 35%);
+}
+
+.no-trophies p {
+  font-size: 1rem;
+  margin: 0;
+}

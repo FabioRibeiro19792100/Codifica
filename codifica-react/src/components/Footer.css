@@ -1,0 +1,40 @@
+.app-footer {
+  padding: 48px 0;
+  border: none;
+  text-align: left;
+  position: relative;
+  background-color: hsl(35, 25%, 92%);
+  color: hsl(0, 0%, 5%);
+  margin-top: auto;
+}
+
+.app-footer .footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 768px) {
+  .app-footer {
+    padding: 64px 0;
+  }
+}
+
+.app-footer p {
+  font-size: 0.875rem;
+  color: hsl(0, 0%, 35%);
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .app-footer p {
+    font-size: 1rem;
+  }
+}
+
+.app-footer p:last-child {
+  margin-bottom: 0;
+}

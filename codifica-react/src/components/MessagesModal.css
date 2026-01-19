@@ -1,0 +1,126 @@
+/* Reusing modal styles from TeamsModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.modal-content {
+  background-color: hsl(35, 25%, 92%);
+  color: hsl(0, 0%, 5%);
+  max-width: 1200px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-header {
+  padding: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin: 0;
+  text-transform: lowercase;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  color: hsl(0, 0%, 5%);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+  padding: 32px;
+}
+
+.messages-list-modal {
+  display: grid;
+  gap: 20px;
+}
+
+.message-item-modal {
+  background: white;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.message-item-modal.urgent {
+  border-left: 4px solid #ff9800;
+}
+
+.message-item-modal.success {
+  border-left: 4px solid #4caf50;
+}
+
+.message-item-modal.info {
+  border-left: 4px solid #2196f3;
+}
+
+.message-icon-modal {
+  flex-shrink: 0;
+  color: #764ba2;
+}
+
+.message-item-modal.urgent .message-icon-modal {
+  color: #ff9800;
+}
+
+.message-item-modal.success .message-icon-modal {
+  color: #4caf50;
+}
+
+.message-item-modal.info .message-icon-modal {
+  color: #2196f3;
+}
+
+.message-info-modal {
+  flex-grow: 1;
+}
+
+.message-title-modal {
+  font-weight: 700;
+  font-size: 1.1em;
+  color: hsl(0, 0%, 5%);
+  margin-bottom: 8px;
+}
+
+.message-body-modal {
+  font-size: 0.9em;
+  color: hsl(0, 0%, 35%);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.message-date-modal {
+  font-size: 0.8em;
+  color: hsl(0, 0%, 50%);
+  font-style: italic;
+}

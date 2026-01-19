@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codifica+ | Jornada Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .hero-label {
+            color: #666;
+            font-size: 1em;
+            margin-top: 5px;
+        }
+        
+        .cta-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #f8f9fa;
+            transform: translateY(-3px);
+        }
+        
+        .timeline-container {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+        
+        .phase-section {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .phase-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .phase-info {
+            flex: 1;
+        }
+        
+        .phase-title {
+            font-size: 2em;
+            color: #764ba2;
+            margin-bottom: 5px;
+        }
+        
+        .phase-date {
+            color: #666;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .phase-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .phase-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-line {
+                left: 30px;
+            }
+        }
+        
+        .what-happens {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .activity-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .rewards-panel {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ffd700;
+        }
+        
+        .badges-at-stake {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .mini-badge {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mini-badge .icon {
+            font-size: 1.3em;
+        }
+        
+        .trophy-highlight {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #c43e00;
+            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
+        }
+        
+        .prize-box {
+            background: #e8f5e9;
+            border: 2px dashed #4caf50;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            text-align: center;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        .countdown-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .countdown-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .countdown-time {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .countdown-label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        
+        .legend {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .legend-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .legend-icon {
+            font-size: 2em;
+        }
+        
+        .legend-text {
+            flex: 1;
+        }
+        
+        .legend-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        
+        .legend-desc {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .final-cta {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .final-cta p {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Codifica+ Climate Action</h1>
+            <p class="subtitle">Jornada Gamificada de Inovação em Sustentabilidade</p>
+            <p style="color: #764ba2; font-size: 1.1em; margin-top: 15px; font-weight: 600;">
+                👨‍🏫 Destinado a professores orientadores que desejam inscrever e acompanhar suas equipes
+            </p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-number">19</div>
+                    <div class="hero-label">Badges para Equipes</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-number">8</div>
+                    <div class="hero-label">Troféus Escolares</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-number">5</div>
+                    <div class="hero-label">Fases da Jornada</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-number">12</div>
+                    <div class="hero-label">Semanas de Programa</div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">👨‍🏫 Inscrever Minhas Equipes</a>
+                <a href="#" class="btn btn-secondary">📖 Ver Regulamento</a>
+            </div>
+        </header>
+        
+        <div class="countdown-box">
+            <div class="countdown-title">⏰ PRÓXIMA FASE COMEÇA EM</div>
+            <div class="countdown-time">5 dias</div>
+            <div class="countdown-label">Não perca o prazo de inscrição!</div>
+        </div>
+        
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <!-- FASE 1: INSCRIÇÕES -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <div class="phase-number">1</div>
+                    <div class="phase-info">
+                        <div class="phase-title">📝 Inscrições e Ativação</div>
+                        <div class="phase-date">
+                            📅 <strong>Semana 1-2</strong> • 15 a 28 de Fevereiro
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phase-content">
+                    <div class="what-happens">
+                        <div class="section-subtitle">O que você (professor) faz nesta fase?</div>
+                        <ul class="activity-list">
+                            <li>Monte equipes de 3-5 estudantes cada</li>
+                            <li>Cadastre-se como professor orientador</li>
+                            <li>Aloque seus alunos nas equipes</li>
+                            <li>Preencha o formulário de inscrição por equipe</li>
+                            <li>Receba acesso à plataforma de acompanhamento</li>
+                            <li>Você pode orientar múltiplas equipes!</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rewards-panel">
+                        <div class="section-subtitle">🏆 O que está em jogo?</div>
+                        <div class="badges-at-stake">
+                            <div class="mini-badge">
+                                <span class="icon">✅</span>
+                                <span>Equipe Ativada</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🌈</span>
+                                <span>Equipe Diversa</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">👨‍🏫</span>
+                                <span>Professor Multi-time</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trophy-highlight">
+                            🏫 ESCOLA: Troféu "Escola Mobilizadora"<br>
+                            <small>(5+ equipes inscritas)</small>
+                        </div>
+                        
+                        <div class="prize-box">
+                            ✨ RECOMPENSAS<br>
+                            Acesso à lista oficial + Sessões exclusivas
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FASE 2: IDEAÇÃO -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <div class="phase-number">2</div>
+                    <div class="phase-info">
+                        <div class="phase-title">💡 Módulo Básico - Ideação</div>
+                        <div class="phase-date">
+                            📅 <strong>Semana 3-5</strong> • 1 a 21 de Março
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phase-content">
+                    <div class="what-happens">
+                        <div class="section-subtitle">O que acontece nesta fase?</div>
+                        <ul class="activity-list">
+                            <li><strong>Workshop de Ideação</strong> - 5 de Março (online)</li>
+                            <li>Você orienta suas equipes a identificar problemas climáticos</li>
+                            <li>Suas equipes desenvolvem soluções inovadoras</li>
+                            <li>Acompanhe o preenchimento do Climate Skills</li>
+                            <li><strong>Plantão de Dúvidas</strong> - 12 e 19 de Março</li>
+                            <li><strong>Entrega pelas equipes:</strong> 21 de Março, 23h59</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rewards-panel">
+                        <div class="section-subtitle">🏆 O que está em jogo?</div>
+                        <div class="badges-at-stake">
+                            <div class="mini-badge">
+                                <span class="icon">💡</span>
+                                <span>Ideação Concluída</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🎪</span>
+                                <span>Workshop Ideação</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">💬</span>
+                                <span>Plantão Ativo</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🌱</span>
+                                <span>Climate Skills OK</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trophy-highlight">
+                            🏫 ESCOLA: Troféu "Escola Persistente"<br>
+                            <small>(80%+ das equipes entregam)</small>
+                        </div>
+                        
+                        <div class="prize-box">
+                            ✨ RECOMPENSAS<br>
+                            Mural público + Prioridade em plantões + Microfeedback
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FASE 3: PROTOTIPAGEM -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <div class="phase-number">3</div>
+                    <div class="phase-info">
+                        <div class="phase-title">🛠️ Módulo Avançado - Prototipagem</div>
+                        <div class="phase-date">
+                            📅 <strong>Semana 6-9</strong> • 24 de Março a 18 de Abril
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phase-content">
+                    <div class="what-happens">
+                        <div class="section-subtitle">O que acontece nesta fase?</div>
+                        <ul class="activity-list">
+                            <li><strong>Workshop de Prototipagem</strong> - 26 de Março</li>
+                            <li>Suas equipes criam protótipos funcionais</li>
+                            <li>Você orienta testes com usuários reais</li>
+                            <li>Acompanhe a documentação do processo</li>
+                            <li><strong>Plantão Premium</strong> - 2, 9 e 16 de Abril</li>
+                            <li><strong>Entrega pelas equipes:</strong> 18 de Abril, 23h59</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rewards-panel">
+                        <div class="section-subtitle">🏆 O que está em jogo?</div>
+                        <div class="badges-at-stake">
+                            <div class="mini-badge">
+                                <span class="icon">🔧</span>
+                                <span>Protótipo Concluído</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🎪</span>
+                                <span>Workshop Prototipagem</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">💬</span>
+                                <span>Plantão Ativo</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🌿</span>
+                                <span>Climate Skills OK</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trophy-highlight">
+                            🏫 ESCOLA: Troféus "Inovadora" + "Climate Champion"<br>
+                            <small>(3+ equipes na final + 100% Climate Skills)</small>
+                        </div>
+                        
+                        <div class="prize-box">
+                            ✨ RECOMPENSAS<br>
+                            Mural de Protótipos + Plantão VIP + Revisão de Demo
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FASE 4: PITCH -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <div class="phase-number">4</div>
+                    <div class="phase-info">
+                        <div class="phase-title">🎤 Fase Final - Apresentação</div>
+                        <div class="phase-date">
+                            📅 <strong>Semana 10-11</strong> • 21 de Abril a 2 de Maio
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phase-content">
+                    <div class="what-happens">
+                        <div class="section-subtitle">O que acontece nesta fase?</div>
+                        <ul class="activity-list">
+                            <li><strong>Workshop de Pitch</strong> - 23 de Abril</li>
+                            <li>Suas equipes gravam vídeos pitch de 3 minutos</li>
+                            <li>Você auxilia na narrativa de impacto</li>
+                            <li>Revisão dos protótipos funcionando</li>
+                            <li><strong>Envio do Pitch:</strong> 28 de Abril, 23h59</li>
+                            <li><strong>Anúncio dos 10 Finalistas:</strong> 30 de Abril</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rewards-panel">
+                        <div class="section-subtitle">🏆 O que está em jogo?</div>
+                        <div class="badges-at-stake">
+                            <div class="mini-badge">
+                                <span class="icon">🎬</span>
+                                <span>Pitch Enviado</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🌳</span>
+                                <span>Climate Skills OK</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🎭</span>
+                                <span>Workshop Pitch</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🏅</span>
+                                <span>Finalista de Banca</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trophy-highlight">
+                            🏫 ESCOLA: Troféu "Escola Finalista"<br>
+                            <small>(1+ equipe entre os 10 finalistas)</small>
+                        </div>
+                        
+                        <div class="prize-box">
+                            ✨ RECOMPENSAS<br>
+                            Galeria pública + Destaques editoriais + Oficina VIP
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FASE 5: BANCA FINAL -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <div class="phase-number">5</div>
+                    <div class="phase-info">
+                        <div class="phase-title">🏆 Banca Final e Premiação</div>
+                        <div class="phase-date">
+                            📅 <strong>Semana 12</strong> • 5 a 9 de Maio
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phase-content">
+                    <div class="what-happens">
+                        <div class="section-subtitle">O que acontece nesta fase?</div>
+                        <ul class="activity-list">
+                            <li><strong>Banca Presencial:</strong> 5 de Maio em São Paulo</li>
+                            <li>10 equipes finalistas apresentam ao vivo</li>
+                            <li>Demonstração dos protótipos</li>
+                            <li>Perguntas da banca especializada</li>
+                            <li><strong>Cerimônia de Premiação:</strong> 9 de Maio</li>
+                            <li>Anúncio das 3 equipes vencedoras</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rewards-panel">
+                        <div class="section-subtitle">🏆 O que está em jogo?</div>
+                        <div class="badges-at-stake">
+                            <div class="mini-badge">
+                                <span class="icon">🎯</span>
+                                <span>Apresentou em Banca</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🤝</span>
+                                <span>Trabalho em Equipe</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">👩‍🏫</span>
+                                <span>Professores-Líderes</span>
+                            </div>
+                            <div class="mini-badge">
+                                <span class="icon">🌍</span>
+                                <span>Global Change Makers</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trophy-highlight">
+                            🏫 ESCOLA: Troféus máximos desbloqueados<br>
+                            <small>"Impacto Real" + "Escola Transformadora"</small>
+                        </div>
+                        
+                        <div class="prize-box" style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-color: #ff6b35; color: #c43e00;">
+                            🎉 PRÊMIO MAIOR<br>
+                            R$ 15.000 + Mentoria + Podcast oficial + Troféu físico
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-title">🎯 Entenda o Sistema de Reconhecimento</div>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-icon">🏅</div>
+                    <div class="legend-text">
+                        <div class="legend-label">Badges Individuais</div>
+                        <div class="legend-desc">19 conquistas para equipes ao longo da jornada</div>
+                    </div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-icon">🏆</div>
+                    <div class="legend-text">
+                        <div class="legend-label">Troféus Escolares</div>
+                        <div class="legend-desc">8 reconhecimentos institucionais para escolas</div>
+                    </div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-icon">🌟</div>
+                    <div class="legend-text">
+                        <div class="legend-label">Visibilidade Pública</div>
+                        <div class="legend-desc">Murais, galerias e destaques oficiais</div>
+                    </div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-icon">🎓</div>
+                    <div class="legend-text">
+                        <div class="legend-label">Acessos Exclusivos</div>
+                        <div class="legend-desc">Plantões VIP, oficinas e mentorias especiais</div>
+                    </div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-icon">💰</div>
+                    <div class="legend-text">
+                        <div class="legend-label">Prêmios em Dinheiro</div>
+                        <div class="legend-desc">Até R$ 15 mil para as equipes vencedoras</div>
+                    </div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-icon">📊</div>
+                    <div class="legend-text">
+                        <div class="legend-label">Rankings</div>
+                        <div class="legend-desc">Competição saudável entre escolas e regiões</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="final-cta">
+            <h2>🚀 Pronto para Orientar suas Equipes?</h2>
+            <p>
+                Cadastre-se como professor orientador, organize suas equipes de estudantes e embarque nesta jornada de inovação climática.<br>
+                <strong>Você pode orientar múltiplas equipes e ganhar reconhecimento especial!</strong>
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">✨ Cadastrar como Professor</a>
+                <a href="#" class="btn btn-secondary">📧 Tirar Dúvidas</a>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 5px solid #667eea;">
+                <strong style="color: #667eea;">💡 Dica para Professores:</strong> 
+                <span style="color: #666;">Professores que orientam múltiplas equipes ganham o badge "Professor Multi-time" e acesso a sessões exclusivas. Quanto mais equipes participam dos workshops e plantões, maior o reconhecimento da sua escola!</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

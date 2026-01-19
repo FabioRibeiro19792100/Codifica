@@ -1,0 +1,93 @@
+/* Reusing modal styles from TeamsModal.css */
+.modal-content-large {
+  max-width: 1200px;
+}
+
+.ranking-info-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ranking-position-large {
+  text-align: center;
+  padding: 32px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.position-number {
+  font-size: 4rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+  margin-bottom: 8px;
+}
+
+.position-label {
+  font-size: 1.125rem;
+  color: hsl(0, 0%, 35%);
+  font-weight: 500;
+}
+
+.ranking-details {
+  background: white;
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.ranking-details p {
+  margin: 12px 0;
+  font-size: 1rem;
+  color: hsl(0, 0%, 35%);
+  line-height: 1.6;
+}
+
+.ranking-details strong {
+  color: hsl(0, 0%, 5%);
+  font-weight: 700;
+}
+
+.ranking-comparison {
+  background: white;
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.ranking-comparison h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+  margin-bottom: 16px;
+}
+
+.comparison-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comparison-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  background: hsl(35, 25%, 92%);
+}
+
+.comparison-position {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+  min-width: 50px;
+}
+
+.comparison-school {
+  flex: 1;
+  font-weight: 500;
+  color: hsl(0, 0%, 5%);
+}
+
+.comparison-points {
+  font-size: 0.9rem;
+  color: hsl(0, 0%, 35%);
+}

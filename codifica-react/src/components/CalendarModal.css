@@ -1,0 +1,140 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.modal-content {
+  background-color: hsl(35, 25%, 92%);
+  color: hsl(0, 0%, 5%);
+  max-width: 1200px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-header {
+  padding: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin: 0;
+  text-transform: lowercase;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: hsl(0, 0%, 5%);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.modal-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+  padding: 32px;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.event-item {
+  background-color: hsl(35, 20%, 85%);
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.event-date {
+  font-size: 0.875rem;
+  color: hsl(0, 0%, 35%);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.event-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+  margin-bottom: 8px;
+}
+
+.event-description {
+  font-size: 0.875rem;
+  color: hsl(0, 0%, 35%);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.event-location {
+  font-size: 0.875rem;
+  color: hsl(0, 0%, 35%);
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.event-type {
+  margin-top: 12px;
+}
+
+.event-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.event-badge.workshop {
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(35, 25%, 92%);
+}
+
+.event-badge.plantao {
+  background-color: hsl(35, 20%, 85%);
+  color: hsl(0, 0%, 5%);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.event-badge.prazo {
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(35, 25%, 92%);
+}
+
+.no-events {
+  text-align: center;
+  padding: 48px;
+  color: hsl(0, 0%, 35%);
+}
+
+.no-events p {
+  font-size: 1rem;
+  margin: 0;
+}

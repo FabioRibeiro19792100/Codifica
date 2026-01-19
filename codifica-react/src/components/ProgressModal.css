@@ -1,0 +1,132 @@
+/* Reusing modal styles from TeamsModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: hsl(35, 25%, 92%);
+  padding: 30px;
+  width: 90%;
+  max-width: 1200px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  color: hsl(0, 0%, 5%);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-header h2 {
+  font-size: 1.8em;
+  font-weight: 700;
+  text-transform: lowercase;
+  margin: 0;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: hsl(0, 0%, 5%);
+  padding: 5px;
+  transition: color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  color: hsl(0, 0%, 35%);
+}
+
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.progress-details-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.progress-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.stat-label-modal {
+  font-size: 0.9em;
+  color: hsl(0, 0%, 35%);
+  margin-bottom: 4px;
+}
+
+.stat-value-modal {
+  font-size: 2em;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+}
+
+.teams-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.teams-progress-title {
+  font-weight: 700;
+  font-size: 1.1em;
+  color: hsl(0, 0%, 5%);
+  margin-bottom: 8px;
+}
+
+.team-progress-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.team-progress-name {
+  flex: 0 0 200px;
+  font-weight: 500;
+  color: hsl(0, 0%, 5%);
+}
+
+.team-progress-bar-container {
+  flex: 1;
+  height: 24px;
+  background: #e0e0e0;
+  position: relative;
+}
+
+.team-progress-bar {
+  height: 100%;
+  background: #667eea;
+  transition: width 0.5s ease;
+}
+
+.team-progress-value {
+  flex: 0 0 50px;
+  text-align: right;
+  font-weight: 600;
+  color: hsl(0, 0%, 5%);
+}

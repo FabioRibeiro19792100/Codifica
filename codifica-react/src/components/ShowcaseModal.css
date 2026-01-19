@@ -1,0 +1,43 @@
+/* Reusing modal styles from TeamsModal.css */
+.showcases-list-modal {
+  display: grid;
+  gap: 20px;
+}
+
+.showcase-item-modal {
+  background: white;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.showcase-icon-modal {
+  flex-shrink: 0;
+  color: #ffd700;
+}
+
+.showcase-info-modal {
+  flex-grow: 1;
+}
+
+.showcase-title-modal {
+  font-weight: 700;
+  font-size: 1.1em;
+  color: hsl(0, 0%, 5%);
+  margin-bottom: 8px;
+}
+
+.showcase-desc-modal {
+  font-size: 0.9em;
+  color: hsl(0, 0%, 35%);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.showcase-date-modal {
+  font-size: 0.8em;
+  color: hsl(0, 0%, 50%);
+  font-style: italic;
+}

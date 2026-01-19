@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd codifica-react && npm install && npm run build",
+  "outputDirectory": "codifica-react/dist",
+  "installCommand": "cd codifica-react && npm install"
+}

@@ -1,5 +1,11 @@
 {
   "buildCommand": "cd codifica-react && npm install && npm run build",
   "outputDirectory": "codifica-react/dist",
-  "installCommand": "cd codifica-react && npm install"
+  "installCommand": "cd codifica-react && npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

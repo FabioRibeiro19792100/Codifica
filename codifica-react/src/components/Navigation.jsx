@@ -1,10 +1,23 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Home as HomeIcon, Globe, GraduationCap, Users, School, Settings } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Home as HomeIcon, Globe, GraduationCap, Users, School, Settings, BookOpen } from 'lucide-react'
 import './Navigation.css'
 
 function Navigation() {
   const location = useLocation()
   const isHomePage = location.pathname === '/'
+  const [showPedagogical, setShowPedagogical] = useState(() => {
+    const saved = localStorage.getItem('showPedagogicalBadges')
+    return saved ? JSON.parse(saved) : false
+  })
+
+  useEffect(() => {
+    localStorage.setItem('showPedagogicalBadges', JSON.stringify(showPedagogical))
+    // Dispara evento para atualizar outras páginas
+    window.dispatchEvent(new CustomEvent('pedagogicalToggleChanged', { 
+      detail: showPedagogical 
+    }))
+  }, [showPedagogical])
 
   return (
     <nav className="navigation">
@@ -26,8 +39,11 @@ function Navigation() {
                   <a href="#fluxo-sistema" className="nav-menu-item">
                     Fluxo do Sistema
                   </a>
+                  <a href="#modelos-badges" className="nav-menu-item">
+                    Sistemas de Badges
+                  </a>
                   <a href="#paginas-sistema" className="nav-menu-item">
-                    Páginas do Sistema
+                    Seções do Sistema
                   </a>
                   <a href="#informacoes" className="nav-menu-item">
                     Informações
@@ -68,13 +84,28 @@ function Navigation() {
             </div>
           </div>
           
-          <Link 
-            to="/admin" 
-            className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
-          >
-            <Settings size={18} />
-            <span>Admin</span>
-          </Link>
+          <div className="nav-right">
+            <div className="pedagogical-toggle">
+              <BookOpen size={16} />
+              <label className="toggle-switch">
+                <input 
+                  type="checkbox" 
+                  checked={showPedagogical}
+                  onChange={(e) => setShowPedagogical(e.target.checked)}
+                />
+                <span className="toggle-slider"></span>
+              </label>
+              <span className="toggle-label">Badges Pedagógicos</span>
+            </div>
+            
+            <Link 
+              to="/admin" 
+              className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
+            >
+              <Settings size={18} />
+              <span>Admin</span>
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

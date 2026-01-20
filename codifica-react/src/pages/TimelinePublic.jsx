@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Trophy, GraduationCap, School, Globe, BarChart3, Award, Users, Lightbulb, Calendar, Wrench, Mic, Sparkles, CheckCircle2, FileText, MessageSquare, Leaf, Video, TreePine, Theater, Target, Handshake, BookOpen, Mail, Rocket, Clock, Star, ChevronDown, ChevronUp } from 'lucide-react'
 import { loadGamificationData } from '../data/gamificationData'
 import { getIcon } from '../utils/iconMap'
+import PedagogicalBadgeModal from '../components/PedagogicalBadgeModal'
 import Footer from '../components/Footer'
 import './TimelinePublic.css'
 
@@ -10,6 +11,11 @@ function TimelinePublic() {
   const [data, setData] = useState(null)
   const [expandedPhases, setExpandedPhases] = useState([]) // IDs das fases expandidas
   const [isComingSoonModalOpen, setIsComingSoonModalOpen] = useState(false)
+  const [selectedPedagogicalBadge, setSelectedPedagogicalBadge] = useState(null)
+  const [showPedagogical, setShowPedagogical] = useState(() => {
+    const saved = localStorage.getItem('showPedagogicalBadges')
+    return saved ? JSON.parse(saved) : false
+  })
 
   useEffect(() => {
     // Recarrega dados quando a página é montada ou quando há mudanças no localStorage
@@ -17,13 +23,28 @@ function TimelinePublic() {
       setData(loadGamificationData())
     }
     loadData()
+    
     // Escuta mudanças no localStorage (evento nativo para outras abas)
-    window.addEventListener('storage', loadData)
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'showPedagogicalBadges') {
+        setShowPedagogical(JSON.parse(e.newValue || 'false'))
+      }
+      loadData()
+    })
+    
     // Escuta evento customizado (para mesma aba)
     window.addEventListener('gamificationDataChanged', loadData)
+    
+    // Escuta mudanças no toggle pedagógico
+    const handleToggleChange = (e) => {
+      setShowPedagogical(e.detail)
+    }
+    window.addEventListener('pedagogicalToggleChanged', handleToggleChange)
+    
     return () => {
       window.removeEventListener('storage', loadData)
       window.removeEventListener('gamificationDataChanged', loadData)
+      window.removeEventListener('pedagogicalToggleChanged', handleToggleChange)
     }
   }, [])
 
@@ -37,8 +58,18 @@ function TimelinePublic() {
 
   if (!data) return <div>Carregando...</div>
 
-  // Calcular estatísticas dinamicamente
-  const totalBadges = data.phases.reduce((sum, phase) => sum + phase.badges.length, 0)
+
+  // Calcular estatísticas dinamicamente (contando apenas badges visíveis)
+  const totalBadges = data.phases.reduce((sum, phase) => {
+    const visibleBadges = phase.badges.filter(badge => {
+      if (!showPedagogical) {
+        return !badge.isPedagogical && !badge.competency && !badge.criteria
+      }
+      // Se toggle ligado, conta apenas básicos
+      return badge.level !== 'advanced'
+    })
+    return sum + visibleBadges.length
+  }, 0)
   const totalTrophies = data.allTrophies.length
   const totalPhases = data.phases.length
 
@@ -99,20 +130,39 @@ function TimelinePublic() {
                         <Trophy size={24} style={{display: 'inline', verticalAlign: 'middle', marginRight: '8px'}} /> O que você pode conquistar?
                       </div>
                       <div className="badges-at-stake">
-                        {phase.badges.map((badge) => {
-                          const BadgeIcon = getIcon(badge.icon)
-                          return (
-                            <div key={badge.id} className="badge-item-stake">
-                              <div className="badge-icon-stake">
-                                <BadgeIcon size={24} />
+                        {phase.badges
+                          .filter(badge => {
+                            // Se toggle desligado, mostra apenas badges originais (sem isPedagogical)
+                            if (!showPedagogical) {
+                              // Garante que badge.isPedagogical seja explicitamente false ou undefined
+                              // E também verifica se não tem competency ou criteria
+                              return !badge.isPedagogical && !badge.competency && !badge.criteria
+                            }
+                            // Se toggle ligado, mostra apenas badges básicos (não avançados)
+                            return badge.level !== 'advanced'
+                          })
+                          .map((badge) => {
+                            const BadgeIcon = getIcon(badge.icon)
+                            const isPedagogical = badge.isPedagogical || false
+                            return (
+                              <div 
+                                key={badge.id} 
+                                className={`badge-item-stake ${isPedagogical ? 'pedagogical-badge clickable' : ''} ${badge.level === 'advanced' ? 'advanced-badge' : ''}`}
+                                onClick={isPedagogical ? () => setSelectedPedagogicalBadge(badge) : undefined}
+                                style={isPedagogical ? { cursor: 'pointer' } : {}}
+                              >
+                                <div className="badge-icon-stake">
+                                  <BadgeIcon size={24} />
+                                </div>
+                                <div className="badge-info-stake">
+                                  <div className="badge-name-stake">
+                                    {badge.name}
+                                  </div>
+                                  <div className="badge-desc-stake">{badge.description}</div>
+                                </div>
                               </div>
-                              <div className="badge-info-stake">
-                                <div className="badge-name-stake">{badge.name}</div>
-                                <div className="badge-desc-stake">{badge.description}</div>
-                              </div>
-                            </div>
-                          )
-                        })}
+                            )
+                          })}
                       </div>
                     </div>
                   </div>
@@ -213,6 +263,12 @@ function TimelinePublic() {
       )}
       
       <Footer />
+      
+      <PedagogicalBadgeModal
+        isOpen={!!selectedPedagogicalBadge}
+        onClose={() => setSelectedPedagogicalBadge(null)}
+        badge={selectedPedagogicalBadge}
+      />
     </div>
   )
 }

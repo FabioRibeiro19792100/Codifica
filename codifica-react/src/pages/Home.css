@@ -248,6 +248,227 @@ section[id] {
   overflow: visible;
 }
 
+.models-section {
+  padding: 80px 0;
+  background-color: hsl(35, 25%, 92%);
+}
+
+.models-section .container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.models-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+@media (min-width: 768px) {
+  .models-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+    align-items: start;
+  }
+}
+
+.model-box {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.model-box .model-visual {
+  margin-top: auto;
+}
+
+.model-box:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.model-box.original {
+  border-left: 5px solid #667eea;
+}
+
+.model-box.pedagogical {
+  border-left: 5px solid #10b981;
+}
+
+.model-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 60px;
+}
+
+.model-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+  margin: 0;
+}
+
+.model-badge-count {
+  background: hsl(35, 20%, 85%);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(0, 0%, 5%);
+}
+
+.model-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(0, 0%, 35%);
+  margin-bottom: 24px;
+  min-height: 48px;
+}
+
+.model-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.model-features li {
+  padding: 8px 0;
+  font-size: 0.95rem;
+  color: hsl(0, 0%, 5%);
+  line-height: 1.5;
+}
+
+.model-visual {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .model-visual {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    align-items: start;
+    margin-top: 24px;
+  }
+}
+
+.badge-example {
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .badge-example {
+    min-height: 120px;
+    height: 120px;
+  }
+}
+
+.badge-example.earned {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.badge-example.earned::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ffd700;
+  color: #667eea;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.badge-example.pedagogical-basic {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.08) 100%);
+  border-color: #10b981;
+  color: hsl(0, 0%, 5%);
+}
+
+.badge-example.pedagogical-advanced {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-color: #8b5cf6;
+  color: hsl(0, 0%, 5%);
+}
+
+.badge-example.locked {
+  background: #f5f7fa;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: hsl(0, 0%, 5%);
+  opacity: 0.65;
+}
+
+.badge-example.locked .badge-example-icon {
+  opacity: 0.7;
+  color: #666;
+}
+
+.badge-example-icon {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.model-features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-example-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.model-toggle-info {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px dashed rgba(16, 185, 129, 0.4);
+  border-radius: 8px;
+}
+
+.toggle-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  color: hsl(0, 0%, 5%);
+  line-height: 1.5;
+}
+
 .info-section {
   padding: 48px 0;
   border: none;

@@ -35,6 +35,24 @@ export const gamificationData = {
       subtitle: "Semana 3-5",
       dateRange: "1 a 21 de Março",
       icon: "Lightbulb",
+      // NOVO: Competências desenvolvidas nesta fase
+      competencies: [
+        {
+          name: "Pensamento Crítico",
+          description: "Como identificar problemas autênticos e do mundo real que são importantes para as comunidades",
+          evidence: "Justificativa clara do problema com pesquisa e contexto de apoio"
+        },
+        {
+          name: "Empatia e Contexto",
+          description: "Compreender a perspectiva, as necessidades e a experiência vivida do usuário",
+          evidence: "Clareza na definição do público-alvo e seus desafios específicos"
+        },
+        {
+          name: "Colaboração Inicial",
+          description: "Trabalhar eficazmente em grupos com diversas perspectivas e habilidades",
+          evidence: "Estrutura de equipe organizada com papéis claros e padrões de comunicação"
+        }
+      ],
       activities: [
         "Workshop de Ideação - 5 de Março (online)",
         "Você orienta suas equipes a identificar problemas climáticos",
@@ -44,9 +62,72 @@ export const gamificationData = {
         "Entrega pelas equipes: 21 de Março, 23h59"
       ],
       badges: [
-        { id: 4, name: "Workshop Ideação", icon: "Calendar", description: "Participação na oficina de ideação" },
-        { id: 5, name: "Plantão Ativo", icon: "MessageSquare", description: "Presença confirmada no plantão de dúvidas" },
-        { id: 6, name: "Ideação Concluída", icon: "Lightbulb", description: "Entrega da fase de Ideação registrada" }
+        // Badges originais (sempre visíveis - estilo original mantido)
+        { 
+          id: 4, 
+          name: "Workshop Ideação", 
+          icon: "Calendar", 
+          description: "Participação na oficina de ideação"
+        },
+        { 
+          id: 5, 
+          name: "Plantão Ativo", 
+          icon: "MessageSquare", 
+          description: "Presença confirmada no plantão de dúvidas"
+        },
+        { 
+          id: 6, 
+          name: "Ideação Concluída", 
+          icon: "Lightbulb", 
+          description: "Entrega da fase de Ideação registrada"
+        },
+        { 
+          id: 7, 
+          name: "Climate Skills OK Ideação", 
+          icon: "Leaf", 
+          description: "Campo Climate Skills preenchido na entrega"
+        },
+        // Badges pedagógicos NOVOS (só aparecem com toggle ligado)
+        { 
+          id: 100, 
+          name: "Problema Bem Definido", 
+          icon: "Lightbulb", 
+          description: "Demonstra articulação clara do problema",
+          isPedagogical: true,
+          competency: "Pensamento Crítico",
+          level: "basic",
+          criteria: {
+            minimum: [
+              "Problema real descrito com clareza",
+              "Público-alvo claramente identificado",
+              "Contexto básico fornecido"
+            ],
+            excellence: [
+              "Evidência de pesquisa que apoia a existência do problema",
+              "Articulação clara do impacto se o problema permanecer sem solução",
+              "Compreensão nuances dos stakeholders afetados"
+            ]
+          }
+        },
+        { 
+          id: 101, 
+          name: "Ideia Propósito", 
+          icon: "Target", 
+          description: "Reflete conexão significativa com as necessidades do usuário",
+          isPedagogical: true,
+          competency: "Empatia e Contexto",
+          level: "basic",
+          criteria: {
+            minimum: [
+              "Conexão básica estabelecida entre ideia e necessidade do usuário"
+            ],
+            excellence: [
+              "Análise profunda das necessidades do usuário",
+              "Evidência de pesquisa com usuários reais",
+              "Solução demonstra compreensão genuína do contexto"
+            ]
+          }
+        }
       ],
       trophies: [
         { name: "Escola Persistente", criteria: "80%+ das equipes entregam" }
@@ -60,6 +141,24 @@ export const gamificationData = {
       subtitle: "Semana 6-9",
       dateRange: "24 de Março a 18 de Abril",
       icon: "Wrench",
+      // NOVO: Competências desenvolvidas nesta fase
+      competencies: [
+        {
+          name: "Pensamento Computacional",
+          description: "Estruturar soluções através de sequenciamento lógico e pensamento algorítmico",
+          evidence: "Diagramas de fluxo de trabalho claros, protótipos lógicos ou estruturas de código funcionais"
+        },
+        {
+          name: "Iteração",
+          description: "Testar premissas, coletar feedback e aprimorar designs sistematicamente",
+          evidence: "Múltiplas versões de protótipos mostrando refinamento progressivo"
+        },
+        {
+          name: "Autonomia",
+          description: "Resolver problemas técnicos de forma independente e tomar decisões informadas",
+          evidence: "Decisões técnicas documentadas com raciocínio claro e compensações"
+        }
+      ],
       activities: [
         "Workshop de Prototipagem - 26 de Março",
         "Suas equipes criam protótipos funcionais",
@@ -69,9 +168,90 @@ export const gamificationData = {
         "Entrega pelas equipes: 18 de Abril, 23h59"
       ],
       badges: [
-        { id: 8, name: "Workshop Prototipagem", icon: "Calendar", description: "Participação na oficina de prototipagem" },
-        { id: 9, name: "Plantão Ativo", icon: "MessageSquare", description: "Presença confirmada no plantão" },
-        { id: 10, name: "Protótipo Concluído", icon: "Wrench", description: "Entrega do protótipo registrada" }
+        // Badges originais (sempre visíveis - estilo original mantido)
+        { 
+          id: 8, 
+          name: "Workshop Prototipagem", 
+          icon: "Calendar", 
+          description: "Participação na oficina de prototipagem"
+        },
+        { 
+          id: 9, 
+          name: "Plantão Ativo", 
+          icon: "MessageSquare", 
+          description: "Presença confirmada no plantão"
+        },
+        { 
+          id: 10, 
+          name: "Protótipo Concluído", 
+          icon: "Wrench", 
+          description: "Entrega do protótipo registrada"
+        },
+        { 
+          id: 11, 
+          name: "Climate Skills OK Protótipo", 
+          icon: "Leaf", 
+          description: "Campo Climate Skills preenchido na entrega"
+        },
+        // Badges pedagógicos NOVOS (só aparecem com toggle ligado)
+        { 
+          id: 102, 
+          name: "Protótipo Funcional", 
+          icon: "Wrench", 
+          description: "Demonstra um produto mínimo viável funcionando",
+          isPedagogical: true,
+          competency: "Pensamento Computacional",
+          level: "basic",
+          criteria: {
+            minimum: [
+              "Protótipo funcional entregue",
+              "Demonstração básica de funcionamento"
+            ],
+            excellence: [
+              "Protótipo totalmente funcional com todas as features principais",
+              "Documentação clara do funcionamento",
+              "Testes básicos realizados"
+            ]
+          }
+        },
+        { 
+          id: 103, 
+          name: "Iteração Inteligente", 
+          icon: "RotateCw", 
+          description: "Mostra refinamento cuidadoso baseado em testes",
+          isPedagogical: true,
+          competency: "Iteração",
+          level: "advanced",
+          criteria: {
+            minimum: [
+              "Protótipo ajustado com base no feedback recebido em testes ou de colegas"
+            ],
+            excellence: [
+              "Documentação clara do que mudou, por que mudou e o que foi aprendido durante o processo de iteração",
+              "Múltiplas versões documentadas",
+              "Evidência de aprendizado com cada iteração"
+            ]
+          }
+        },
+        { 
+          id: 104, 
+          name: "Autonomia Técnica", 
+          icon: "Zap", 
+          description: "Reflete capacidade de resolução independente de problemas",
+          isPedagogical: true,
+          competency: "Autonomia",
+          level: "advanced",
+          criteria: {
+            minimum: [
+              "Resolveu problemas técnicos sem ajuda constante"
+            ],
+            excellence: [
+              "Decisões técnicas documentadas com raciocínio claro e compensações",
+              "Demonstrou capacidade de pesquisar e aplicar soluções",
+              "Tomou decisões informadas sobre trade-offs técnicos"
+            ]
+          }
+        }
       ],
       trophies: [
         { name: "Escola Inovadora", criteria: "3+ equipes na final" },
@@ -94,10 +274,109 @@ export const gamificationData = {
         "Envio do Pitch: 28 de Abril, 23h59",
         "Anúncio dos 10 Finalistas: 30 de Abril"
       ],
+      // NOVO: Competências desenvolvidas nesta fase
+      competencies: [
+        {
+          name: "Comunicação",
+          description: "Articular ideias complexas de forma clara para diversas audiências",
+          evidence: "Clareza e coerência na apresentação do pitch e materiais de apoio"
+        },
+        {
+          name: "Argumentação",
+          description: "Defender decisões de design com raciocínio lógico e evidências",
+          evidence: "Coerência lógica conectando problema, solução e impacto"
+        },
+        {
+          name: "Síntese",
+          description: "Priorizar informações e criar narrativas focadas",
+          evidence: "Pitch conciso e objetivo que comunica valor essencial"
+        }
+      ],
       badges: [
-        { id: 12, name: "Workshop Pitch", icon: "Theater", description: "Participação no workshop de pitch" },
-        { id: 13, name: "Pitch Enviado", icon: "Video", description: "Vídeo pitch enviado com sucesso" },
-        { id: 14, name: "Finalista de Banca", icon: "Award", description: "Equipe selecionada entre os 10 finalistas" }
+        // Badges originais
+        { 
+          id: 14, 
+          name: "Workshop Pitch", 
+          icon: "Theater", 
+          description: "Participação no workshop de pitch"
+        },
+        { 
+          id: 15, 
+          name: "Pitch Enviado", 
+          icon: "Video", 
+          description: "Vídeo pitch enviado com sucesso"
+        },
+        { 
+          id: 16, 
+          name: "Finalista de Banca", 
+          icon: "Award", 
+          description: "Equipe selecionada entre os 10 finalistas"
+        },
+        // Badges pedagógicos
+        { 
+          id: 17, 
+          name: "Climate Skills OK Pitch", 
+          icon: "Leaf", 
+          description: "Campo Climate Skills preenchido na entrega"
+        },
+        // Badges pedagógicos NOVOS (só aparecem com toggle ligado)
+        { 
+          id: 105, 
+          name: "Pitch Claro", 
+          icon: "Video", 
+          description: "Demonstra comunicação eficaz de valor",
+          isPedagogical: true,
+          competency: "Comunicação",
+          level: "basic",
+          criteria: {
+            minimum: [
+              "A mensagem é compreensível e pode ser entregue em até 3 minutos com fluxo lógico"
+            ],
+            excellence: [
+              "Narrativa envolvente combinada com dados de suporte e comunicação visual clara",
+              "Pitch cativa públicos diversos",
+              "Mensagem memorável e impactante"
+            ]
+          }
+        },
+        { 
+          id: 106, 
+          name: "Síntese Poderosa", 
+          icon: "Scissors", 
+          description: "Mostra habilidade de destilar complexidade",
+          isPedagogical: true,
+          competency: "Síntese",
+          level: "advanced",
+          criteria: {
+            minimum: [
+              "Pitch focado nos pontos essenciais"
+            ],
+            excellence: [
+              "Consegue comunicar valor essencial de forma concisa",
+              "Prioriza informações de forma estratégica",
+              "Narrativa focada e impactante"
+            ]
+          }
+        },
+        { 
+          id: 107, 
+          name: "Proposta Convincente", 
+          icon: "MessageSquare", 
+          description: "Reflete argumentação persuasiva",
+          isPedagogical: true,
+          competency: "Argumentação",
+          level: "advanced",
+          criteria: {
+            minimum: [
+              "Argumentação básica apresentada"
+            ],
+            excellence: [
+              "Coerência lógica conectando problema, solução e impacto",
+              "Evidências sólidas que apoiam as decisões",
+              "Argumentação convincente e bem estruturada"
+            ]
+          }
+        }
       ],
       trophies: [
         { name: "Escola Finalista", criteria: "1+ equipe entre os 10 finalistas" }
@@ -107,7 +386,100 @@ export const gamificationData = {
     {
       id: 5,
       number: 5,
-      title: "Banca Final e Premiação",
+      title: "Impacto e Contexto",
+      subtitle: "Reflexão sobre Impacto",
+      dateRange: "Entre Pitch e Banca",
+      icon: "Globe",
+      // NOVO: Competências desenvolvidas nesta fase
+      competencies: [
+        {
+          name: "Responsabilidade Social",
+          description: "Pensar criticamente sobre o impacto em comunidades e partes interessadas",
+          evidence: "Análise cuidadosa do contexto e das implicações no mundo real"
+        },
+        {
+          name: "Ética e Sustentabilidade",
+          description: "Considerar consequências, compensações e efeitos a longo prazo",
+          evidence: "Justificativa crítica abordando riscos e benefícios potenciais"
+        },
+        {
+          name: "Visão Sistêmica",
+          description: "Pensar além do produto para ecossistemas mais amplos",
+          evidence: "Conexões claras entre a solução e os sistemas do mundo real"
+        }
+      ],
+      activities: [
+        "Reflexão sobre impacto social do projeto",
+        "Análise de implicações éticas",
+        "Consideração de efeitos a longo prazo",
+        "Avaliação de impacto em comunidades"
+      ],
+      badges: [
+        { 
+          id: 111, 
+          name: "Impacto Relevante", 
+          icon: "Heart", 
+          description: "Demonstra contribuição social significativa",
+          isPedagogical: true,
+          competency: "Responsabilidade Social",
+          level: "basic",
+          criteria: {
+            minimum: [
+              "Relação clara estabelecida entre o projeto e um problema social identificado"
+            ],
+            excellence: [
+              "Análise abrangente do potencial impacto positivo juntamente com uma avaliação honesta de possíveis riscos ou limitações",
+              "Consideração de stakeholders afetados",
+              "Plano de impacto bem estruturado"
+            ]
+          }
+        },
+        { 
+          id: 112, 
+          name: "Consciência Sistêmica", 
+          icon: "Network", 
+          description: "Mostra compreensão de implicações mais amplas",
+          isPedagogical: true,
+          competency: "Visão Sistêmica",
+          level: "advanced",
+          criteria: {
+            minimum: [
+              "Reconhece conexões básicas com sistemas maiores"
+            ],
+            excellence: [
+              "Conexões claras entre a solução e os sistemas do mundo real",
+              "Compreende efeitos em cascata",
+              "Pensa em ecossistemas completos"
+            ]
+          }
+        },
+        { 
+          id: 113, 
+          name: "Tecnologia Responsável", 
+          icon: "Shield", 
+          description: "Reflete consideração ética e visão futura",
+          isPedagogical: true,
+          competency: "Ética e Sustentabilidade",
+          level: "advanced",
+          criteria: {
+            minimum: [
+              "Consideração básica de aspectos éticos"
+            ],
+            excellence: [
+              "Justificativa crítica abordando riscos e benefícios potenciais",
+              "Análise de consequências a longo prazo",
+              "Consideração de sustentabilidade"
+            ]
+          }
+        }
+      ],
+      trophies: [],
+      rewards: "Reconhecimento de impacto + Destaque em materiais educativos"
+    },
+    {
+      id: 6,
+      number: 6,
+      title: "Banca Final e Legado",
       subtitle: "Semana 12",
       dateRange: "5 a 9 de Maio",
       icon: "Trophy",
@@ -119,10 +491,108 @@ export const gamificationData = {
         "Cerimônia de Premiação: 9 de Maio",
         "Anúncio das 3 equipes vencedoras"
       ],
+      // NOVO: Competências desenvolvidas nesta fase
+      competencies: [
+        {
+          name: "Metacognição",
+          description: "Refletir criticamente sobre seu processo e crescimento",
+          evidence: "Autoavaliação ponderada de pontos fortes e áreas de melhoria"
+        },
+        {
+          name: "Liderança",
+          description: "Influenciar outros e colaborar em níveis mais altos",
+          evidence: "Participação ativa em painéis de avaliação e mentoria de pares"
+        },
+        {
+          name: "Visão de Futuro",
+          description: "Identificar habilidades transferíveis para crescimento contínuo",
+          evidence: "Articulação clara dos próximos passos e metas de aprendizado contínuo"
+        }
+      ],
       badges: [
-        { id: 16, name: "Top 3 na Banca", icon: "Target", description: "Equipe entre as 3 vencedoras da banca final" },
-        { id: 17, name: "Trabalho em Equipe", icon: "Handshake", description: "Demonstrou excelente colaboração" },
-        { id: 18, name: "Alinhamento Climático", icon: "Leaf", description: "Projeto demonstrou estimular competências climáticas na entrega" }
+        // Badges originais (sempre visíveis - estilo original mantido)
+        { 
+          id: 21, 
+          name: "Apresentou em Banca", 
+          icon: "Target", 
+          description: "Equipe apresentou na banca final"
+        },
+        { 
+          id: 22, 
+          name: "Trabalho em Equipe", 
+          icon: "Handshake", 
+          description: "Demonstrou excelente colaboração"
+        },
+        { 
+          id: 23, 
+          name: "Professores-Líderes", 
+          icon: "GraduationCap", 
+          description: "Professor destacado como líder"
+        },
+        { 
+          id: 24, 
+          name: "Global Change Makers", 
+          icon: "Globe", 
+          description: "Equipe reconhecida como agente de mudança global"
+        },
+        // Badges pedagógicos NOVOS (só aparecem com toggle ligado)
+        { 
+          id: 108, 
+          name: "Projeto de Legado", 
+          icon: "Star", 
+          description: "Demonstra contribuição e aprendizado duradouros",
+          isPedagogical: true,
+          competency: "Visão de Futuro",
+          level: "advanced",
+          criteria: {
+            minimum: [
+              "Projeto concluído com sucesso"
+            ],
+            excellence: [
+              "Contribuição duradoura identificada",
+              "Aprendizado transferível articulado",
+              "Impacto que vai além do projeto"
+            ]
+          }
+        },
+        { 
+          id: 109, 
+          name: "Aprendiz Consciente", 
+          icon: "BookOpen", 
+          description: "Demonstra profunda autoconsciência e reflexão",
+          isPedagogical: true,
+          competency: "Metacognição",
+          level: "advanced",
+          criteria: {
+            minimum: [
+              "Reflexão básica sobre o processo"
+            ],
+            excellence: [
+              "Autoavaliação ponderada de pontos fortes e áreas de melhoria",
+              "Reflexão crítica profunda",
+              "Insights valiosos sobre o próprio aprendizado"
+            ]
+          }
+        },
+        { 
+          id: 110, 
+          name: "Protagonismo Digital", 
+          icon: "Rocket", 
+          description: "Reflete agência e mentalidade preparada para o futuro",
+          isPedagogical: true,
+          competency: "Visão de Futuro",
+          level: "advanced",
+          criteria: {
+            minimum: [
+              "Identificou habilidades desenvolvidas"
+            ],
+            excellence: [
+              "Articulação clara dos próximos passos e metas de aprendizado contínuo",
+              "Plano de desenvolvimento futuro",
+              "Mentalidade de crescimento demonstrada"
+            ]
+          }
+        }
       ],
       trophies: [
         { name: "Escola Impacto Real", criteria: "Média 50+ pessoas testando protótipos" },

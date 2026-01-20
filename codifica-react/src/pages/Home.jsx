@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { GraduationCap, Users, School, BarChart3 } from 'lucide-react'
+import { GraduationCap, Users, School, BarChart3, Award, BookOpen, CheckCircle2, Star } from 'lucide-react'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import './Home.css'
@@ -63,8 +63,74 @@ function Home() {
           </div>
         </section>
         
+        <section id="modelos-badges" className="models-section">
+          <div className="container">
+            <h2 className="section-title">Sistemas de Badges</h2>
+            <div className="models-grid">
+              <div className="model-box original">
+                <div className="model-header">
+                  <h3 className="model-title">Badges de Participação</h3>
+                  <span className="model-badge-count">19 badges</span>
+                </div>
+                <p className="model-description">
+                  Sistema de gamificação focado em reconhecimento de participação e conquistas ao longo do programa.
+                </p>
+                <ul className="model-features">
+                  <li><CheckCircle2 size={16} /> Badges de participação (workshops, plantões)</li>
+                  <li><CheckCircle2 size={16} /> Badges de entrega (fases concluídas)</li>
+                  <li><CheckCircle2 size={16} /> Badges de conquista (finalistas, diversidade)</li>
+                  <li><CheckCircle2 size={16} /> Visual azul quando conquistado</li>
+                  <li><CheckCircle2 size={16} /> Sempre visíveis no sistema</li>
+                </ul>
+                <div className="model-visual">
+                  <div className="badge-example earned">
+                    <Award className="badge-example-icon" size={32} />
+                    <div className="badge-example-name">Badge Conquistado</div>
+                  </div>
+                  <div className="badge-example locked">
+                    <Award className="badge-example-icon" size={32} />
+                    <div className="badge-example-name">Badge Não Conquistado</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="model-box pedagogical">
+                <div className="model-header">
+                  <h3 className="model-title">Badges por Competências</h3>
+                  <span className="model-badge-count">Sistema pedagógico</span>
+                </div>
+                <p className="model-description">
+                  Sistema baseado em competências, com critérios claros de avaliação e níveis de desempenho.
+                </p>
+                <ul className="model-features">
+                  <li><CheckCircle2 size={16} /> Baseados em competências específicas</li>
+                  <li><CheckCircle2 size={16} /> Critérios de mínimo e excelência</li>
+                  <li><CheckCircle2 size={16} /> Níveis básico e avançado</li>
+                  <li><CheckCircle2 size={16} /> Visual verde (básico) ou roxo (avançado)</li>
+                  <li><CheckCircle2 size={16} /> Clique para ver detalhes completos</li>
+                </ul>
+                <div className="model-toggle-info">
+                  <p className="toggle-hint">
+                    Use o toggle <strong>"Badges Pedagógicos"</strong> no menu de navegação para ativar/desativar estes badges
+                  </p>
+                </div>
+                <div className="model-visual">
+                  <div className="badge-example pedagogical-basic">
+                    <BookOpen className="badge-example-icon" size={32} />
+                    <div className="badge-example-name">Badge Básico</div>
+                  </div>
+                  <div className="badge-example pedagogical-advanced">
+                    <Star className="badge-example-icon" size={32} />
+                    <div className="badge-example-name">Badge Avançado</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
         <section id="paginas-sistema" className="pages-section">
-          <h2 className="section-title">Páginas do Sistema</h2>
+          <h2 className="section-title">Seções do Sistema</h2>
           <div className="pages-grid">
                 <div className="page-item">
                   <Link to="/timeline" className="page-link">
@@ -73,7 +139,7 @@ function Home() {
                       Página de apresentação do programa mostrando todas as fases, prazos e o que está em jogo em cada etapa.
                     </p>
                 <ul className="page-features">
-                  <li>5 fases detalhadas com datas</li>
+                  <li>6 fases detalhadas com datas</li>
                   <li>Badges e troféus por fase</li>
                   <li>Recompensas e prêmios</li>
                   <li>CTA para professores</li>
@@ -139,6 +205,7 @@ function Home() {
                   <li>Veja o <strong>Dashboard do Professor</strong> para entender a gestão de múltiplas equipes</li>
                   <li>Explore o <strong>Dashboard da Equipe</strong> para ver a experiência dos estudantes</li>
                   <li>Acesse o <strong>Dashboard da Escola</strong> para visualizar reconhecimento institucional</li>
+                  <li>Use o toggle <strong>"Badges Pedagógicos"</strong> para alternar entre os dois modelos</li>
                 </ol>
               </div>
               

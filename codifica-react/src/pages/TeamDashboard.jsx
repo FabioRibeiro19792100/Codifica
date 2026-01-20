@@ -6,6 +6,7 @@ import { getIcon } from '../utils/iconMap'
 import BadgesModal from '../components/BadgesModal'
 import ProgressModal from '../components/ProgressModal'
 import ShowcaseModal from '../components/ShowcaseModal'
+import PedagogicalBadgeModal from '../components/PedagogicalBadgeModal'
 import Footer from '../components/Footer'
 import './TeamDashboard.css'
 
@@ -14,24 +15,59 @@ function TeamDashboard() {
   const [isBadgesModalOpen, setIsBadgesModalOpen] = useState(false)
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false)
   const [isShowcaseModalOpen, setIsShowcaseModalOpen] = useState(false)
+  const [selectedPedagogicalBadge, setSelectedPedagogicalBadge] = useState(null)
+  const [showPedagogical, setShowPedagogical] = useState(() => {
+    const saved = localStorage.getItem('showPedagogicalBadges')
+    return saved ? JSON.parse(saved) : false
+  })
 
   useEffect(() => {
     const loadData = () => {
       setData(loadGamificationData())
     }
     loadData()
-    window.addEventListener('storage', loadData)
+    // Carrega estado inicial do toggle
+    const saved = localStorage.getItem('showPedagogicalBadges')
+    if (saved) {
+      setShowPedagogical(JSON.parse(saved))
+    }
+    
+    const handleStorage = (e) => {
+      if (e.key === 'showPedagogicalBadges') {
+        setShowPedagogical(JSON.parse(e.newValue || 'false'))
+      }
+      loadData()
+    }
+    
+    window.addEventListener('storage', handleStorage)
     window.addEventListener('gamificationDataChanged', loadData)
+    
+    // Escuta mudanças no toggle pedagógico
+    const handleToggleChange = (e) => {
+      setShowPedagogical(e.detail)
+    }
+    window.addEventListener('pedagogicalToggleChanged', handleToggleChange)
+    
     return () => {
-      window.removeEventListener('storage', loadData)
+      window.removeEventListener('storage', handleStorage)
       window.removeEventListener('gamificationDataChanged', loadData)
+      window.removeEventListener('pedagogicalToggleChanged', handleToggleChange)
     }
   }, [])
 
   if (!data) return <div>Carregando...</div>
 
-  // Calcular progresso dinamicamente
-  const totalBadges = data.phases.reduce((sum, phase) => sum + phase.badges.length, 0)
+  // Calcular progresso dinamicamente (contando apenas badges visíveis)
+  const totalBadges = data.phases.reduce((sum, phase) => {
+    const visibleBadges = phase.badges.filter(badge => {
+      if (!showPedagogical) {
+        return !badge.isPedagogical && !badge.competency && !badge.criteria
+      }
+      // Se toggle ligado, conta apenas básicos
+      return badge.level !== 'advanced'
+    })
+    return sum + visibleBadges.length
+  }, 0)
   
   // Criar lista de todos os badges com informações de fase
   const allBadges = data.phases.flatMap((phase, phaseIndex) => 
@@ -113,21 +149,42 @@ function TeamDashboard() {
                 </div>
                 
                 <div className="badges-grid">
-                  {phase.badges.map((badge) => {
-                    const BadgeIcon = getIcon(badge.icon)
-                    // Badge conquistado baseado na lista individual de badges conquistados
-                    const isEarned = earnedBadgeIds.includes(badge.id)
-                    
-                    return (
-                      <div key={badge.id} className={`badge-card ${isEarned ? 'earned' : 'locked'}`}>
-                        <div className="badge-icon">
-                          <BadgeIcon size={48} />
+                  {phase.badges
+                    .filter(badge => {
+                      // Se toggle desligado, mostra apenas badges originais (sem isPedagogical)
+                      if (!showPedagogical) {
+                        // Garante que badge.isPedagogical seja explicitamente false ou undefined
+                        return !badge.isPedagogical && !badge.competency && !badge.criteria
+                      }
+                      // Se toggle ligado, mostra apenas badges básicos (não avançados)
+                      return badge.level !== 'advanced'
+                    })
+                    .map((badge) => {
+                      const BadgeIcon = getIcon(badge.icon)
+                      // Badge conquistado baseado na lista individual de badges conquistados
+                      const isEarned = earnedBadgeIds.includes(badge.id)
+                      const isPedagogical = badge.isPedagogical || false
+                      
+                      return (
+                        <div 
+                          key={badge.id} 
+                          className={`badge-card ${isEarned ? 'earned' : 'locked'} ${isPedagogical ? 'pedagogical-badge-card clickable' : ''} ${badge.level === 'advanced' ? 'advanced-badge-card' : ''}`}
+                          onClick={isPedagogical ? () => setSelectedPedagogicalBadge(badge) : undefined}
+                          style={isPedagogical ? { cursor: 'pointer' } : {}}
+                        >
+                          <div className="badge-icon">
+                            <BadgeIcon size={48} />
+                          </div>
+                          <div className="badge-name">
+                            {badge.name}
+                          </div>
+                          <div className="badge-description">{badge.description}</div>
+                          {showPedagogical && isPedagogical && (
+                            <div className="pedagogical-click-hint">Clique para ver critérios</div>
+                          )}
                         </div>
-                        <div className="badge-name">{badge.name}</div>
-                        <div className="badge-description">{badge.description}</div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
                 </div>
               </div>
             )
@@ -140,12 +197,19 @@ function TeamDashboard() {
       {(() => {
         const earnedBadgeList = allBadges.filter(badge => earnedBadgeIds.includes(badge.id))
         return (
-          <BadgesModal
-            isOpen={isBadgesModalOpen}
-            onClose={() => setIsBadgesModalOpen(false)}
-            badges={earnedBadgeList}
-            title="Badges Conquistados"
-          />
+          <>
+            <BadgesModal
+              isOpen={isBadgesModalOpen}
+              onClose={() => setIsBadgesModalOpen(false)}
+              badges={earnedBadgeList}
+              title="Badges Conquistados"
+            />
+            <PedagogicalBadgeModal
+              isOpen={!!selectedPedagogicalBadge}
+              onClose={() => setSelectedPedagogicalBadge(null)}
+              badge={selectedPedagogicalBadge}
+            />
+          </>
         )
       })()}
 

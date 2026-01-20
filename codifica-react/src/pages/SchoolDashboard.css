@@ -197,17 +197,19 @@ h1 {
   width: 200%;
   height: 200%;
   background: transparent;
-  animation: shine 3s infinite;
+  animation: shine 6s infinite;
+  animation-timing-function: ease-in-out;
 }
 
 @keyframes shine {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+  50% { opacity: 0.3; }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
 }
 
 .trophy-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  
+  transform: translateY(-5px) scale(1.01);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .trophy-icon {
@@ -220,12 +222,13 @@ h1 {
 
 .trophy-card.earned .trophy-icon {
   
-  animation: pulse 2s infinite;
+  animation: pulse 4s infinite;
+  animation-timing-function: ease-in-out;
 }
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  50% { transform: scale(1.05); }
 }
 
 .trophy-name {

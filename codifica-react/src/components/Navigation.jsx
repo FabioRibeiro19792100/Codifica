@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { Home as HomeIcon, Globe, GraduationCap, Users, School, Settings, BookOpen } from 'lucide-react'
+import { Home as HomeIcon, Globe, GraduationCap, Users, School, Settings, BookOpen, FileText } from 'lucide-react'
 import './Navigation.css'
 
 function Navigation() {
@@ -97,6 +97,14 @@ function Navigation() {
               </label>
               <span className="toggle-label">Badges Pedagógicos</span>
             </div>
+            
+            <Link 
+              to="/documentation" 
+              className={`nav-link ${location.pathname === '/documentation' ? 'active' : ''}`}
+            >
+              <FileText size={18} />
+              <span>Documentação</span>
+            </Link>
             
             <Link 
               to="/admin" 

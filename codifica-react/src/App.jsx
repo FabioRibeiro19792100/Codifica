@@ -5,6 +5,7 @@ import TeacherDashboard from './pages/TeacherDashboard'
 import TeamDashboard from './pages/TeamDashboard'
 import SchoolDashboard from './pages/SchoolDashboard'
 import AdminDashboard from './pages/AdminDashboard'
+import Documentation from './pages/Documentation'
 import Navigation from './components/Navigation'
 import './App.css'
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/team" element={<><Navigation /><TeamDashboard /></>} />
         <Route path="/school" element={<><Navigation /><SchoolDashboard /></>} />
         <Route path="/admin" element={<><Navigation /><AdminDashboard /></>} />
+        <Route path="/documentation" element={<><Navigation /><Documentation /></>} />
       </Routes>
     </Router>
   )

@@ -1,0 +1,756 @@
+.documentation-page {
+  min-height: 100vh;
+  background-color: hsl(35, 25%, 92%);
+  color: hsl(0, 0%, 5%);
+  padding-top: 73px;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.documentation-page .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 10;
+  flex: 1;
+}
+
+.doc-header {
+  padding: 64px 0 48px;
+  margin-bottom: 32px;
+  text-align: left;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  background: transparent;
+}
+
+.doc-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: lowercase;
+  color: hsl(0, 0%, 5%);
+}
+
+@media (min-width: 768px) {
+  .doc-header h1 {
+    font-size: 5rem;
+  }
+}
+
+.doc-subtitle {
+  font-size: 1.25rem;
+  color: hsl(0, 0%, 35%);
+  font-weight: 300;
+}
+
+.doc-section {
+  background: white;
+  padding: 48px;
+  margin-bottom: 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.intro-section {
+  background: transparent;
+  border-left: 5px solid #667eea;
+  box-shadow: none;
+}
+
+.intro-content .lead-text {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: hsl(0, 0%, 5%);
+  margin-bottom: 32px;
+}
+
+.program-features {
+  margin: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.feature-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.feature-item svg {
+  color: #667eea;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.feature-item h3 {
+  margin: 0 0 12px 0;
+  color: #667eea;
+  font-size: 1.3rem;
+}
+
+.feature-item p {
+  margin: 0;
+}
+
+.adaptations-2026 {
+  margin: 40px 0;
+  padding-top: 32px;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.adaptations-2026 h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: #667eea;
+  font-size: 1.8rem;
+}
+
+.adaptation-card {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #667eea;
+}
+
+.adaptation-card h4 {
+  margin: 0 0 12px 0;
+  color: #667eea;
+  font-size: 1.2rem;
+}
+
+.adaptation-card p {
+  margin: 0;
+  color: hsl(0, 0%, 5%);
+}
+
+.gamification-intro {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.gamification-intro h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #667eea;
+  font-size: 1.5rem;
+}
+
+.gamification-intro p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.doc-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  margin-top: 0;
+  text-transform: lowercase;
+  color: hsl(0, 0%, 5%);
+}
+
+.doc-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  margin-top: 32px;
+  color: hsl(0, 0%, 5%);
+}
+
+.doc-section h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: hsl(0, 0%, 5%);
+}
+
+.doc-section p {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 16px;
+  color: hsl(0, 0%, 5%);
+}
+
+.section-intro {
+  font-size: 1.1rem;
+  color: hsl(0, 0%, 35%);
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+.doc-section ul {
+  margin-left: 24px;
+  margin-bottom: 24px;
+}
+
+.doc-section li {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 8px;
+  color: hsl(0, 0%, 5%);
+}
+
+/* Objectives Grid */
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.objective-card {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  padding: 32px;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.objective-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+}
+
+.objective-card svg {
+  color: #667eea;
+  margin-bottom: 16px;
+}
+
+.objective-card h3 {
+  margin: 0 0 12px 0;
+  color: #667eea;
+  font-size: 1.3rem;
+}
+
+.objective-card p {
+  margin: 0;
+  color: hsl(0, 0%, 35%);
+}
+
+/* Audience Cards */
+.audience-card {
+  display: flex;
+  gap: 24px;
+  background: hsl(35, 20%, 95%);
+  padding: 32px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border-left: 5px solid #667eea;
+}
+
+.audience-icon {
+  flex-shrink: 0;
+  color: #667eea;
+}
+
+.audience-content h3 {
+  margin: 0 0 12px 0;
+  color: #667eea;
+  font-size: 1.5rem;
+}
+
+.audience-content p {
+  margin-bottom: 12px;
+}
+
+.audience-content strong {
+  color: hsl(0, 0%, 5%);
+}
+
+/* How It Works */
+.how-it-works {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.step-card {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  position: relative;
+}
+
+.step-number {
+  position: absolute;
+  top: -20px;
+  left: 24px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.step-card h3 {
+  margin-top: 12px;
+  color: #667eea;
+}
+
+/* Phase Cards */
+.phase-doc-card {
+  background: hsl(35, 20%, 95%);
+  padding: 40px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  border-left: 6px solid #667eea;
+}
+
+.phase-doc-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.phase-doc-number {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #667eea;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.phase-doc-header h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.8rem;
+  color: hsl(0, 0%, 5%);
+}
+
+.phase-doc-dates {
+  font-size: 1rem;
+  color: hsl(0, 0%, 35%);
+  margin: 0;
+}
+
+.phase-content p {
+  margin-bottom: 12px;
+}
+
+.phase-content strong {
+  color: #667eea;
+}
+
+/* Recognition Sections */
+.recognition-section {
+  margin-bottom: 48px;
+}
+
+.recognition-section h3 {
+  color: #667eea;
+  margin-bottom: 16px;
+}
+
+.badge-category {
+  background: hsl(35, 20%, 95%);
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #667eea;
+}
+
+.badge-category h4 {
+  color: #667eea;
+  margin-bottom: 12px;
+}
+
+.pedagogical-section {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  padding: 32px;
+  border-radius: 12px;
+  border-left: 5px solid #10b981;
+}
+
+.pedagogical-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.pedagogical-feature {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.pedagogical-feature svg {
+  color: #10b981;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.pedagogical-feature h4 {
+  margin: 0 0 8px 0;
+  color: #10b981;
+}
+
+.pedagogical-feature p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Trophies Grid */
+.trophies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.trophy-doc-item {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
+  padding: 24px;
+  border-radius: 12px;
+  border-left: 4px solid #ffd700;
+  transition: transform 0.2s;
+}
+
+.trophy-doc-item:hover {
+  transform: translateY(-2px);
+}
+
+.trophy-doc-item svg {
+  color: #ffd700;
+  margin-bottom: 12px;
+}
+
+.trophy-doc-item h4 {
+  font-size: 1.1rem;
+  margin: 0 0 8px 0;
+  color: hsl(0, 0%, 5%);
+}
+
+.trophy-doc-item p {
+  font-size: 0.9rem;
+  color: hsl(0, 0%, 35%);
+  margin: 0;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+  background: hsl(35, 20%, 95%);
+  padding: 32px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border-left: 5px solid #667eea;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.dashboard-header svg {
+  color: #667eea;
+}
+
+.dashboard-header h3 {
+  margin: 0;
+  color: #667eea;
+  font-size: 1.5rem;
+}
+
+.dashboard-card p {
+  margin-bottom: 12px;
+}
+
+.dashboard-card ul {
+  margin-top: 16px;
+}
+
+.dashboard-card li {
+  margin-bottom: 8px;
+}
+
+/* Feature Highlights */
+.feature-highlight {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  padding: 28px;
+  border-radius: 12px;
+  border-left: 5px solid #667eea;
+  margin-bottom: 24px;
+}
+
+.feature-highlight h3 {
+  margin-top: 0;
+  color: #667eea;
+}
+
+.feature-highlight ul {
+  margin-top: 16px;
+}
+
+/* Benefits Grid */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.benefit-card {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.benefit-card svg {
+  color: #667eea;
+  margin-bottom: 16px;
+}
+
+.benefit-card h3 {
+  margin: 0 0 16px 0;
+  color: #667eea;
+}
+
+.benefit-card ul {
+  margin: 0;
+}
+
+.benefit-card li {
+  margin-bottom: 12px;
+}
+
+/* Next Steps */
+.next-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.next-step-card {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  position: relative;
+}
+
+.next-step-number {
+  position: absolute;
+  top: -20px;
+  left: 24px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.next-step-card h3 {
+  margin-top: 12px;
+  color: #667eea;
+}
+
+/* Final Section */
+.final-section {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-left: 5px solid #667eea;
+}
+
+.project-info {
+  background: white;
+  padding: 32px;
+  border-radius: 8px;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+.project-info p {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.project-info strong {
+  color: #667eea;
+}
+
+/* PDF Viewers */
+.pdf-viewers {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.pdf-viewer-card {
+  background: white;
+  border-radius: 12px;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pdf-viewer-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+.pdf-viewer-header svg:first-child {
+  color: #667eea;
+  flex-shrink: 0;
+}
+
+.pdf-viewer-header > div {
+  flex: 1;
+}
+
+.pdf-viewer-header h3 {
+  margin: 0 0 4px 0;
+  color: #667eea;
+  font-size: 1.3rem;
+}
+
+.pdf-viewer-header p {
+  margin: 0;
+  color: hsl(0, 0%, 35%);
+  font-size: 0.95rem;
+}
+
+.pdf-header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.pdf-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.pdf-toggle-btn:hover {
+  background: #667eea;
+  color: white;
+  transform: scale(1.05);
+}
+
+.pdf-download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #667eea;
+  color: white;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.pdf-download-btn:hover {
+  background: #5568d3;
+  transform: scale(1.05);
+}
+
+.pdf-embed-container {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  background: #f5f5f5;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .doc-section {
+    padding: 24px;
+  }
+
+  .doc-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .doc-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .objectives-grid,
+  .how-it-works,
+  .trophies-grid,
+  .benefits-grid,
+  .next-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .audience-card {
+    flex-direction: column;
+  }
+
+  .phase-doc-header {
+    flex-direction: column;
+  }
+
+  .phase-doc-number {
+    font-size: 3rem;
+  }
+
+  .pedagogical-info {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-item {
+    flex-direction: column;
+  }
+
+  .pdf-viewer-header {
+    flex-wrap: wrap;
+  }
+
+  .pdf-embed-container {
+    height: 600px;
+  }
+}

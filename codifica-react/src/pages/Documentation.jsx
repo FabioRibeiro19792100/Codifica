@@ -574,7 +574,7 @@ function Documentation() {
                     {expandedPdfs.relatorioFinal ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                   </button>
                   <a 
-                    href="/Relatório Final Codifica+.pdf" 
+                    href="/Relatorio_Final_Codifica.pdf" 
                     download 
                     className="pdf-download-btn"
                     title="Baixar PDF"
@@ -586,7 +586,7 @@ function Documentation() {
               {expandedPdfs.relatorioFinal && (
                 <div className="pdf-embed-container">
                   <iframe
-                    src="/Relatório Final Codifica+.pdf#zoom=33"
+                    src="/Relatorio_Final_Codifica.pdf#zoom=33"
                     title="Relatório Final Codifica+"
                     className="pdf-iframe"
                   />
@@ -610,7 +610,7 @@ function Documentation() {
                     {expandedPdfs.relatorioTecnico ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                   </button>
                   <a 
-                    href="/Relatório técnico -- Codifica+ (versão final -- 31102025) (1).pdf" 
+                    href="/Relatorio_Tecnico_Codifica.pdf" 
                     download 
                     className="pdf-download-btn"
                     title="Baixar PDF"
@@ -622,7 +622,7 @@ function Documentation() {
               {expandedPdfs.relatorioTecnico && (
                 <div className="pdf-embed-container">
                   <iframe
-                    src="/Relatório técnico -- Codifica+ (versão final -- 31102025) (1).pdf#zoom=110"
+                    src="/Relatorio_Tecnico_Codifica.pdf#zoom=110"
                     title="Relatório Técnico Codifica+"
                     className="pdf-iframe"
                   />

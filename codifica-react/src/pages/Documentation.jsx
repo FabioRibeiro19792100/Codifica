@@ -70,7 +70,7 @@ function Documentation() {
             <div className="gamification-intro">
               <h3>Sobre este Sistema de Gamificação</h3>
               <p>
-                Este sistema de gamificação foi criado especificamente para o <strong>Codifica+ Climate Action 2026</strong>, com o objetivo de engajar professores, estudantes e escolas através de reconhecimentos visuais e objetivos ao longo de toda a jornada. O protótipo demonstra como badges, troféus e competências serão apresentados e conquistados, criando uma experiência motivadora e transparente para todos os participantes.
+                Este sistema de gamificação foi criado especificamente para o <strong>Codifica+2026</strong>, com o objetivo de engajar professores, estudantes e escolas através de reconhecimentos visuais e objetivos ao longo de toda a jornada. O protótipo demonstra como badges, troféus e competências serão apresentados e conquistados, criando uma experiência motivadora e transparente para todos os participantes.
               </p>
             </div>
           </div>
@@ -548,7 +548,7 @@ function Documentation() {
             <div className="next-step-card">
               <div className="next-step-number">4</div>
               <h3>Lançamento</h3>
-              <p>Disponibilizar o sistema para inscrições e início do programa Codifica+ Climate Action 2026.</p>
+              <p>Disponibilizar o sistema para inscrições e início do programa Codifica+2026.</p>
             </div>
           </div>
         </section>
@@ -635,7 +635,7 @@ function Documentation() {
         <section className="doc-section final-section">
           <h2>Informações do Projeto</h2>
           <div className="project-info">
-            <p><strong>Programa:</strong> Codifica+ Climate Action</p>
+            <p><strong>Programa:</strong> Codifica+2026</p>
             <p><strong>Iniciativa:</strong> British Council</p>
             <p><strong>Versão do Protótipo:</strong> 1.0</p>
             <p><strong>Desenvolvido para:</strong> Mastertech</p>

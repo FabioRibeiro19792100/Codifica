@@ -7,7 +7,7 @@ import './AdminDashboard.css'
 function AdminDashboard() {
   const [data, setData] = useState(null)
   const [editing, setEditing] = useState(null)
-  const [editingType, setEditingType] = useState(null) // 'phase', 'badge', 'trophy', 'activity'
+  const [editingType, setEditingType] = useState(null) // 'phase', 'badge', 'trophy', 'activity', 'competency'
   const [formData, setFormData] = useState({})
 
   useEffect(() => {
@@ -34,7 +34,12 @@ function AdminDashboard() {
   const handleEdit = (item, type, parentId = null) => {
     setEditing({ id: item.id || item.name, parentId, type })
     setEditingType(type)
-    setFormData({ ...item })
+    // Garante que criteria existe para badges pedagógicos
+    const formDataCopy = { ...item }
+    if (type === 'badge' && formDataCopy.isPedagogical && !formDataCopy.criteria) {
+      formDataCopy.criteria = { minimum: [], excellence: [] }
+    }
+    setFormData(formDataCopy)
   }
 
   const handleCancel = () => {
@@ -81,6 +86,17 @@ function AdminDashboard() {
       if (phaseIndex !== -1) {
         newData.phases[phaseIndex].activities[editing.id] = formData.text
       }
+    } else if (editingType === 'competency') {
+      const phaseIndex = newData.phases.findIndex(p => p.id === editing.parentId)
+      if (phaseIndex !== -1) {
+        if (!newData.phases[phaseIndex].competencies) {
+          newData.phases[phaseIndex].competencies = []
+        }
+        const compIndex = newData.phases[phaseIndex].competencies.findIndex(c => c.name === editing.id)
+        if (compIndex !== -1) {
+          newData.phases[phaseIndex].competencies[compIndex] = { ...newData.phases[phaseIndex].competencies[compIndex], ...formData }
+        }
+      }
     }
     
     setData(newData)
@@ -117,6 +133,11 @@ function AdminDashboard() {
         const indexToDelete = typeof item === 'number' ? item : item.id
         newData.phases[phaseIndex].activities = newData.phases[phaseIndex].activities.filter((_, i) => i !== indexToDelete)
       }
+    } else if (type === 'competency') {
+      const phaseIndex = newData.phases.findIndex(p => p.id === parentId)
+      if (phaseIndex !== -1 && newData.phases[phaseIndex].competencies) {
+        newData.phases[phaseIndex].competencies = newData.phases[phaseIndex].competencies.filter(c => c.name !== item.name)
+      }
     }
     
     setData(newData)
@@ -149,6 +170,55 @@ function AdminDashboard() {
         saveGamificationData(newData)
         handleEdit({ id: newData.phases[phaseIndex].activities.length - 1, text: "Nova atividade" }, 'activity', parentId)
       }
+    } else if (type === 'competency') {
+      const phaseIndex = data.phases.findIndex(p => p.id === parentId)
+      if (phaseIndex !== -1) {
+        const newData = { ...data }
+        if (!newData.phases[phaseIndex].competencies) {
+          newData.phases[phaseIndex].competencies = []
+        }
+        const newCompetency = {
+          name: "Nova Competência",
+          description: "Descrição da competência",
+          evidence: "Evidência esperada"
+        }
+        newData.phases[phaseIndex].competencies.push(newCompetency)
+        setData(newData)
+        saveGamificationData(newData)
+        handleEdit(newCompetency, 'competency', parentId)
+      }
+    }
+  }
+
+  const handleCriteriaArrayChange = (field, index, value) => {
+    const newFormData = { ...formData }
+    if (!newFormData.criteria) {
+      newFormData.criteria = { minimum: [], excellence: [] }
+    }
+    if (!newFormData.criteria[field]) {
+      newFormData.criteria[field] = []
+    }
+    newFormData.criteria[field][index] = value
+    setFormData(newFormData)
+  }
+
+  const handleAddCriteriaItem = (field) => {
+    const newFormData = { ...formData }
+    if (!newFormData.criteria) {
+      newFormData.criteria = { minimum: [], excellence: [] }
+    }
+    if (!newFormData.criteria[field]) {
+      newFormData.criteria[field] = []
+    }
+    newFormData.criteria[field].push("")
+    setFormData(newFormData)
+  }
+
+  const handleRemoveCriteriaItem = (field, index) => {
+    const newFormData = { ...formData }
+    if (newFormData.criteria && newFormData.criteria[field]) {
+      newFormData.criteria[field] = newFormData.criteria[field].filter((_, i) => i !== index)
+      setFormData(newFormData)
     }
   }
 
@@ -217,6 +287,67 @@ function AdminDashboard() {
                   <>
                     <div className="admin-subsection">
                       <div className="subsection-header">
+                        <h4>Competências</h4>
+                        <button onClick={() => handleAdd('competency', phase.id)} className="btn-add-small">
+                          <Plus size={14} /> Adicionar
+                        </button>
+                      </div>
+                      {phase.competencies && phase.competencies.length > 0 ? (
+                        <div className="competencies-list">
+                          {phase.competencies.map((competency, idx) => (
+                            <div key={idx} className="competency-item">
+                              {editing && editing.id === competency.name && editingType === 'competency' && editing.parentId === phase.id ? (
+                                <div className="edit-form">
+                                  <input
+                                    type="text"
+                                    value={formData.name || ''}
+                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    placeholder="Nome da competência"
+                                  />
+                                  <textarea
+                                    value={formData.description || ''}
+                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                    placeholder="Descrição"
+                                  />
+                                  <textarea
+                                    value={formData.evidence || ''}
+                                    onChange={(e) => setFormData({ ...formData, evidence: e.target.value })}
+                                    placeholder="Evidência esperada"
+                                  />
+                                  <div className="form-actions">
+                                    <button onClick={handleSaveEdit} className="btn-save-small">Salvar</button>
+                                    <button onClick={handleCancel} className="btn-cancel">Cancelar</button>
+                                  </div>
+                                </div>
+                              ) : (
+                                <>
+                                  <div>
+                                    <strong>{competency.name}</strong>
+                                    <p>{competency.description}</p>
+                                    <small>Evidência: {competency.evidence}</small>
+                                  </div>
+                                  <div className="item-actions">
+                                    <button onClick={() => handleEdit(competency, 'competency', phase.id)} className="btn-edit-small">
+                                      <Edit2 size={12} />
+                                    </button>
+                                    <button onClick={() => handleDelete(competency, 'competency', phase.id)} className="btn-delete-small">
+                                      <Trash2 size={12} />
+                                    </button>
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p style={{ color: 'hsl(0, 0%, 35%)', fontStyle: 'italic', padding: '16px' }}>
+                          Nenhuma competência cadastrada. Clique em "Adicionar" para criar uma.
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="admin-subsection">
+                      <div className="subsection-header">
                         <h4>Atividades</h4>
                         <button onClick={() => handleAdd('activity', phase.id)} className="btn-add-small">
                           <Plus size={14} /> Adicionar
@@ -283,6 +414,83 @@ function AdminDashboard() {
                                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                   placeholder="Descrição"
                                 />
+                                
+                                {/* Campos Pedagógicos */}
+                                <div className="pedagogical-fields">
+                                  <label className="checkbox-label">
+                                    <input
+                                      type="checkbox"
+                                      checked={formData.isPedagogical || false}
+                                      onChange={(e) => {
+                                        const newFormData = { ...formData, isPedagogical: e.target.checked }
+                                        if (e.target.checked && !newFormData.criteria) {
+                                          newFormData.criteria = { minimum: [], excellence: [] }
+                                        }
+                                        setFormData(newFormData)
+                                      }}
+                                    />
+                                    <span>Badge Pedagógico</span>
+                                  </label>
+                                  
+                                  {formData.isPedagogical && (
+                                    <>
+                                      <input
+                                        type="text"
+                                        value={formData.competency || ''}
+                                        onChange={(e) => setFormData({ ...formData, competency: e.target.value })}
+                                        placeholder="Competência relacionada"
+                                      />
+                                      <select
+                                        value={formData.level || 'basic'}
+                                        onChange={(e) => setFormData({ ...formData, level: e.target.value })}
+                                      >
+                                        <option value="basic">Básico</option>
+                                        <option value="advanced">Avançado</option>
+                                      </select>
+                                      
+                                      <div className="criteria-section">
+                                        <h5>Critérios Mínimos</h5>
+                                        {(formData.criteria?.minimum || []).map((item, idx) => (
+                                          <div key={idx} className="criteria-item">
+                                            <input
+                                              type="text"
+                                              value={item}
+                                              onChange={(e) => handleCriteriaArrayChange('minimum', idx, e.target.value)}
+                                              placeholder="Critério mínimo"
+                                            />
+                                            <button onClick={() => handleRemoveCriteriaItem('minimum', idx)} className="btn-remove-criteria">
+                                              <X size={14} />
+                                            </button>
+                                          </div>
+                                        ))}
+                                        <button onClick={() => handleAddCriteriaItem('minimum')} className="btn-add-criteria">
+                                          <Plus size={14} /> Adicionar Critério Mínimo
+                                        </button>
+                                      </div>
+                                      
+                                      <div className="criteria-section">
+                                        <h5>Critérios de Excelência</h5>
+                                        {(formData.criteria?.excellence || []).map((item, idx) => (
+                                          <div key={idx} className="criteria-item">
+                                            <input
+                                              type="text"
+                                              value={item}
+                                              onChange={(e) => handleCriteriaArrayChange('excellence', idx, e.target.value)}
+                                              placeholder="Critério de excelência"
+                                            />
+                                            <button onClick={() => handleRemoveCriteriaItem('excellence', idx)} className="btn-remove-criteria">
+                                              <X size={14} />
+                                            </button>
+                                          </div>
+                                        ))}
+                                        <button onClick={() => handleAddCriteriaItem('excellence')} className="btn-add-criteria">
+                                          <Plus size={14} /> Adicionar Critério de Excelência
+                                        </button>
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
+                                
                                 <div className="form-actions">
                                   <button onClick={handleSaveEdit} className="btn-save-small">Salvar</button>
                                   <button onClick={handleCancel} className="btn-cancel">Cancelar</button>
@@ -292,8 +500,15 @@ function AdminDashboard() {
                               <>
                                 <div>
                                   <strong>{badge.name}</strong>
+                                  {badge.isPedagogical && <span className="pedagogical-badge-tag">Pedagógico</span>}
                                   <p>{badge.description}</p>
                                   <small>Ícone: {badge.icon}</small>
+                                  {badge.isPedagogical && (
+                                    <>
+                                      <small>Competência: {badge.competency}</small>
+                                      <small>Nível: {badge.level === 'basic' ? 'Básico' : 'Avançado'}</small>
+                                    </>
+                                  )}
                                 </div>
                                 <div className="item-actions">
                                   <button onClick={() => handleEdit(badge, 'badge', phase.id)} className="btn-edit-small">

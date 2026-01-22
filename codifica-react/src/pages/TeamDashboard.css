@@ -1,43 +1,78 @@
 .team-dashboard {
-  padding: 20px;
+  padding: 16px;
   padding-top: 93px; /* Space for fixed navigation */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+@media (min-width: 768px) {
+  .team-dashboard {
+    padding: 20px;
+  }
+}
+
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
   flex: 1;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
 }
 
 header {
   background: white;
-  padding: 30px;
-  
-  margin-bottom: 30px;
-  
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  header {
+    padding: 30px;
+    margin-bottom: 30px;
+  }
 }
 
 h1 {
   color: #667eea;
-  font-size: 2.5em;
+  font-size: 1.8em;
   margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5em;
+  }
 }
 
 .subtitle {
   color: #666;
-  font-size: 1.2em;
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 1.2em;
+  }
 }
 
 .team-info {
   background: white;
-  padding: 25px;
-  
-  margin-bottom: 30px;
-  
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .team-info {
+    padding: 25px;
+    margin-bottom: 30px;
+  }
 }
 
 .team-header {
@@ -461,9 +496,16 @@ h1 {
 
 .showcase-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: 1fr;
+  gap: 16px;
   margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .showcase-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
 }
 
 .showcase-item {
@@ -593,16 +635,29 @@ h1 {
 
 .stats {
   display: flex;
-  gap: 30px;
+  flex-direction: column;
+  gap: 16px;
   margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .stats {
+    flex-direction: row;
+    gap: 30px;
+  }
 }
 
 .stat-item {
   flex: 1;
   text-align: center;
-  padding: 20px;
+  padding: 16px;
   background: #f8f9fa;
-  
+}
+
+@media (min-width: 768px) {
+  .stat-item {
+    padding: 20px;
+  }
 }
 
 .stat-item.clickable {
@@ -615,13 +670,25 @@ h1 {
 }
 
 .stat-number {
-  font-size: 2.5em;
+  font-size: 2em;
   font-weight: bold;
   color: #667eea;
 }
 
+@media (min-width: 768px) {
+  .stat-number {
+    font-size: 2.5em;
+  }
+}
+
 .stat-label {
   color: #666;
-  font-size: 0.9em;
+  font-size: 0.85em;
   margin-top: 5px;
+}
+
+@media (min-width: 768px) {
+  .stat-label {
+    font-size: 0.9em;
+  }
 }

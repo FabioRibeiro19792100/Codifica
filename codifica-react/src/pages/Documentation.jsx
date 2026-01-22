@@ -269,7 +269,7 @@ function Documentation() {
             <div className="phase-content">
               <p><strong>O que acontece:</strong> Finalistas apresentam projetos para banca avaliadora. Celebração de conquistas e legado do programa.</p>
               <p><strong>Competências desenvolvidas:</strong> Metacognição, Liderança, Visão de Futuro</p>
-              <p><strong>Badges disponíveis:</strong> Apresentou em Banca, Trabalho em Equipe, Professores-Líderes, Global Change Makers</p>
+              <p><strong>Badges disponíveis:</strong> Apresentou em Banca, Trabalho em Equipe, Professores-Líderes, Global Change Makers, English Trail Champion</p>
               <p><strong>Badges pedagógicos:</strong> Projeto de Legado, Aprendiz Consciente, Protagonismo Digital</p>
               <p><strong>Troféus escolares:</strong> Escola Impacto Real, Escola Transformadora</p>
             </div>
@@ -280,7 +280,7 @@ function Documentation() {
           <h2>Sistema de Reconhecimentos</h2>
           
           <div className="recognition-section">
-            <h3>Badges Individuais (19 badges)</h3>
+            <h3>Badges Individuais (20 badges)</h3>
             <p>Reconhecimentos para equipes ao longo da jornada. Divididos em três categorias:</p>
             
             <div className="badge-category">
@@ -307,7 +307,7 @@ function Documentation() {
               <ul>
                 <li>Equipe Ativada, Equipe Diversa, Professor Multi-time</li>
                 <li>Finalista de Banca, Apresentou em Banca</li>
-                <li>Trabalho em Equipe, Professores-Líderes, Global Change Makers</li>
+                <li>Trabalho em Equipe, Professores-Líderes, Global Change Makers, English Trail Champion</li>
               </ul>
             </div>
           </div>

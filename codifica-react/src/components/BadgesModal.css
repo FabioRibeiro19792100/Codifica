@@ -14,12 +14,22 @@
 
 .modal-content {
   background: hsl(35, 25%, 92%);
-  padding: 30px;
-  width: 90%;
+  padding: 20px;
+  width: 95%;
   max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
   color: hsl(0, 0%, 5%);
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .modal-content {
+    padding: 30px;
+    width: 90%;
+  }
 }
 
 .modal-header {

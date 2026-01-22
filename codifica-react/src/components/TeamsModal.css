@@ -9,7 +9,13 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 24px;
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .modal-overlay {
+    padding: 24px;
+  }
 }
 
 .modal-content {
@@ -17,24 +23,37 @@
   color: hsl(0, 0%, 5%);
   max-width: 1200px;
   width: 100%;
-  max-height: 80vh;
+  max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  box-sizing: border-box;
 }
 
 .modal-header {
-  padding: 32px;
+  padding: 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+@media (min-width: 768px) {
+  .modal-header {
+    padding: 32px;
+  }
+}
+
 .modal-header h2 {
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
   text-transform: lowercase;
+}
+
+@media (min-width: 768px) {
+  .modal-header h2 {
+    font-size: 1.875rem;
+  }
 }
 
 .modal-close {
@@ -54,7 +73,13 @@
 }
 
 .modal-body {
-  padding: 32px;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .modal-body {
+    padding: 32px;
+  }
 }
 
 .teams-list {

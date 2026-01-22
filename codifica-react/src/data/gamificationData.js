@@ -535,6 +535,12 @@ export const gamificationData = {
           icon: "Globe", 
           description: "Equipe reconhecida como agente de mudança global"
         },
+        { 
+          id: 25, 
+          name: "English Trail Champion", 
+          icon: "Languages", 
+          description: "Completed the entire program journey in English"
+        },
         // Badges pedagógicos NOVOS (só aparecem com toggle ligado)
         { 
           id: 108, 

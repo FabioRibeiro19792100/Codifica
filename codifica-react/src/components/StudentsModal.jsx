@@ -16,7 +16,7 @@ function StudentsModal({ isOpen, onClose, students, title }) {
         </div>
         <div className="modal-body">
           {students.length === 0 ? (
-            <p>Nenhum estudante encontrado.</p>
+            <p>No students found.</p>
           ) : (
             <div className="students-list-modal">
               {students.map((student, index) => (
@@ -27,10 +27,10 @@ function StudentsModal({ isOpen, onClose, students, title }) {
                   <div className="student-info-modal">
                     <div className="student-name-modal">{student.name}</div>
                     {student.team && (
-                      <div className="student-team-modal">Equipe: {student.team}</div>
+                      <div className="student-team-modal">Team: {student.team}</div>
                     )}
                     {student.badgesCount !== undefined && (
-                      <div className="student-badges-modal">{student.badgesCount} badges conquistados</div>
+                      <div className="student-badges-modal">{student.badgesCount} badges earned</div>
                     )}
                   </div>
                 </div>

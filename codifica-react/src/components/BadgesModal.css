@@ -93,6 +93,14 @@
   line-height: 1.4;
 }
 
+.badge-criteria-modal {
+  font-size: 0.85em;
+  color: hsl(0, 0%, 25%);
+  margin-bottom: 5px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
 .badge-phase-modal {
   font-size: 0.8em;
   color: hsl(0, 0%, 50%);

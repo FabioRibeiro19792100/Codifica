@@ -157,15 +157,15 @@ h1 {
   padding-bottom: 10px;
 }
 
-.trophies-section {
+.distinctions-section {
   background: white;
   padding: 30px;
-  
+
   margin-bottom: 30px;
-  
+
 }
 
-.trophies-grid {
+.distinctions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 25px;
@@ -173,7 +173,7 @@ h1 {
   grid-auto-rows: 1fr;
 }
 
-.trophy-card {
+.distinction-card {
   background: #e8e9eb;
   padding: 30px;
   text-align: center;
@@ -184,12 +184,12 @@ h1 {
   flex-direction: column;
 }
 
-.trophy-card.earned {
+.distinction-card.earned {
   background: #ffd700;
   border-color: hsl(0, 0%, 5%);
 }
 
-.trophy-card.earned::before {
+.distinction-card.earned::before {
   content: '';
   position: absolute;
   top: -50%;
@@ -205,12 +205,12 @@ h1 {
   100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
-.trophy-card:hover {
+.distinction-card:hover {
   transform: translateY(-8px) scale(1.02);
-  
+
 }
 
-.trophy-icon {
+.distinction-icon {
   font-size: 4em;
   margin-bottom: 15px;
   position: relative;
@@ -218,8 +218,8 @@ h1 {
   flex-shrink: 0;
 }
 
-.trophy-card.earned .trophy-icon {
-  
+.distinction-card.earned .distinction-icon {
+
   animation: pulse 2s infinite;
 }
 
@@ -228,7 +228,7 @@ h1 {
   50% { transform: scale(1.1); }
 }
 
-.trophy-name {
+.distinction-name {
   font-weight: bold;
   font-size: 1.2em;
   margin-bottom: 10px;
@@ -243,11 +243,11 @@ h1 {
   flex-shrink: 0;
 }
 
-.trophy-card.earned .trophy-name {
+.distinction-card.earned .distinction-name {
   color: hsl(0, 0%, 5%);
 }
 
-.trophy-description {
+.distinction-description {
   font-size: 0.95em;
   opacity: 0.8;
   margin-bottom: 15px;
@@ -256,12 +256,12 @@ h1 {
   flex: 1;
 }
 
-.trophy-card.earned .trophy-description {
+.distinction-card.earned .distinction-description {
   opacity: 0.9;
   color: #5a3200;
 }
 
-.trophy-criteria {
+.distinction-criteria {
   background: rgba(255,255,255,0.5);
   padding: 12px;
   font-size: 0.9em;
@@ -277,7 +277,7 @@ h1 {
   gap: 4px;
 }
 
-.trophy-card.earned .trophy-criteria {
+.distinction-card.earned .distinction-criteria {
   background: rgba(255,255,255,0.7);
   color: hsl(0, 0%, 5%);
 }
@@ -410,4 +410,117 @@ h1 {
 
 .achievement-box strong {
   font-weight: 700;
+}
+
+/* Distinction Tooltip */
+.distinction-card {
+  position: relative;
+}
+
+.distinction-tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: hsl(0, 0%, 5%);
+  color: hsl(35, 25%, 92%);
+  padding: 16px;
+  min-width: 240px;
+  max-width: 300px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  text-align: left;
+}
+
+.distinction-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: hsl(0, 0%, 5%);
+}
+
+.distinction-card:hover .distinction-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.distinction-tooltip-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.distinction-tooltip-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  opacity: 0.85;
+}
+
+.distinction-tooltip-criteria {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.distinction-tooltip-criteria strong {
+  font-weight: 700;
+}
+
+/* School Competency Analytics */
+.school-competency-section {
+  background: white;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.school-competency-desc {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.school-competency-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.school-comp-bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.school-comp-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: hsl(0, 0%, 5%);
+}
+
+.school-comp-value {
+  font-weight: 700;
+}
+
+.school-comp-bar {
+  background: #e0e0e0;
+  height: 12px;
+  overflow: hidden;
+}
+
+.school-comp-fill {
+  height: 100%;
+  transition: width 0.5s ease;
 }

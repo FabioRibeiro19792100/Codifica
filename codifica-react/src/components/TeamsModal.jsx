@@ -1,4 +1,4 @@
-import { X, Users, GraduationCap, Award, CheckCircle2 } from 'lucide-react'
+import { X, Users, GraduationCap, Award, CheckCircle2, Languages } from 'lucide-react'
 import './TeamsModal.css'
 
 function TeamsModal({ isOpen, onClose, teams, title }) {
@@ -31,7 +31,7 @@ function TeamsModal({ isOpen, onClose, teams, title }) {
                   <div className="team-members">
                     <div className="team-members-label">
                       <GraduationCap size={16} style={{display: 'inline', verticalAlign: 'middle', marginRight: '4px'}} />
-                      Membros:
+                      Members:
                     </div>
                     <div className="team-members-list">
                       {team.members.map((member, idx) => (
@@ -42,6 +42,12 @@ function TeamsModal({ isOpen, onClose, teams, title }) {
                       ))}
                     </div>
                   </div>
+                  {team.englishTrack && (
+                    <div className="team-english-tag" style={{display: 'inline-flex', alignItems: 'center', background: '#e3f2fd', color: '#1565c0', padding: '3px 8px', fontSize: '0.75rem', fontWeight: 600, marginTop: '8px', textTransform: 'uppercase', letterSpacing: '0.03em'}}>
+                      <Languages size={12} style={{display: 'inline', verticalAlign: 'middle', marginRight: '4px'}} />
+                      English Track
+                    </div>
+                  )}
                   {team.status && (
                     <div className="team-status">
                       <CheckCircle2 size={16} style={{display: 'inline', verticalAlign: 'middle', marginRight: '4px'}} />
@@ -53,7 +59,7 @@ function TeamsModal({ isOpen, onClose, teams, title }) {
             </div>
           ) : (
             <div className="no-teams">
-              <p>Nenhuma equipe encontrada.</p>
+              <p>No teams found.</p>
             </div>
           )}
         </div>

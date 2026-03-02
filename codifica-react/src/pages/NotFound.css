@@ -1,0 +1,42 @@
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(35, 25%, 92%);
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.not-found-content {
+  text-align: center;
+}
+
+.not-found-code {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 8px;
+  opacity: 0.15;
+}
+
+.not-found-text {
+  font-size: 1.125rem;
+  margin: 0 0 32px;
+  opacity: 0.55;
+}
+
+.not-found-link {
+  display: inline-block;
+  padding: 12px 24px;
+  background: hsl(0, 0%, 5%);
+  color: hsl(35, 25%, 92%);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: opacity 0.15s ease;
+}
+
+.not-found-link:hover {
+  opacity: 0.85;
+}

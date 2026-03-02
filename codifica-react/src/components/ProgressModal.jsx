@@ -19,13 +19,13 @@ function ProgressModal({ isOpen, onClose, progressData, title }) {
             <div className="progress-stat-item">
               <BarChart3 size={24} />
               <div>
-                <div className="stat-label-modal">Progresso Médio</div>
+                <div className="stat-label-modal">Average Progress</div>
                 <div className="stat-value-modal">{progressData.average}%</div>
               </div>
             </div>
             {progressData.teams && progressData.teams.length > 0 && (
               <div className="teams-progress-list">
-                <div className="teams-progress-title">Progresso por Equipe:</div>
+                <div className="teams-progress-title">Progress by Team:</div>
                 {progressData.teams.map((team, index) => (
                   <div key={index} className="team-progress-item">
                     <div className="team-progress-name">{team.name}</div>

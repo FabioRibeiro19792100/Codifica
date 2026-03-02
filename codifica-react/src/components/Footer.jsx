@@ -4,8 +4,8 @@ function Footer() {
   return (
     <footer className="app-footer">
       <div className="footer-container">
-        <p><strong>Codifica+ 2026</strong> • Sistema de Gamificação</p>
-        <p>Desenvolvido para Mastertech • 2026</p>
+        <p><strong>Codifica+ 2026</strong> • STEM and English can change your life</p>
+        <p>British Council • Mastertech • 2026</p>
       </div>
     </footer>
   )

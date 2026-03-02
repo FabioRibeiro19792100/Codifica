@@ -16,7 +16,7 @@ function ShowcaseModal({ isOpen, onClose, showcases, title }) {
         </div>
         <div className="modal-body">
           {showcases.length === 0 ? (
-            <p>Nenhuma vitrine encontrada.</p>
+            <p>No showcases found.</p>
           ) : (
             <div className="showcases-list-modal">
               {showcases.map((showcase, index) => (

@@ -1,10 +1,28 @@
-import { Link, useLocation } from 'react-router-dom'
-import { Home as HomeIcon, Globe, GraduationCap, Users, School, Settings } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Globe, GraduationCap, School, Settings, LogOut } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
 import './Navigation.css'
+
+const NAV_ITEMS = [
+  { to: '/timeline', icon: Globe, label: 'Timeline', roles: ['professor', 'gestor', 'admin'] },
+  { to: '/teacher', icon: GraduationCap, label: 'Dashboard', roles: ['professor', 'admin'] },
+  { to: '/school', icon: School, label: 'Dashboard', roles: ['gestor', 'admin'] },
+  { to: '/admin', icon: Settings, label: 'Admin', roles: ['admin'] },
+]
 
 function Navigation() {
   const location = useLocation()
-  const isHomePage = location.pathname === '/'
+  const navigate = useNavigate()
+  const { user, logout } = useAuth()
+
+  const visibleItems = NAV_ITEMS.filter(item =>
+    user && item.roles.includes(user.role)
+  )
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
   return (
     <nav className="navigation">
@@ -13,68 +31,38 @@ function Navigation() {
         <div className="nav-content">
           <div className="nav-left">
             <div className="nav-logo-wrapper">
-              <Link 
-                to="/" 
-                className="nav-logo"
-              >
+              <Link to="/" className="nav-logo">
                 <span>codifica+</span>
                 <span className="nav-year">2026</span>
               </Link>
-              
-              {isHomePage && (
-                <div className="nav-menu">
-                  <a href="#fluxo-sistema" className="nav-menu-item">
-                    Fluxo do Sistema
-                  </a>
-                  <a href="#paginas-sistema" className="nav-menu-item">
-                    Páginas do Sistema
-                  </a>
-                  <a href="#informacoes" className="nav-menu-item">
-                    Informações
-                  </a>
-                </div>
-              )}
             </div>
-            
+
             <div className="nav-links">
-              <Link 
-                to="/timeline" 
-                className={`nav-link ${location.pathname === '/timeline' ? 'active' : ''}`}
-              >
-                <Globe size={18} />
-                <span>Timeline</span>
-              </Link>
-              <Link 
-                to="/teacher" 
-                className={`nav-link ${location.pathname === '/teacher' ? 'active' : ''}`}
-              >
-                <GraduationCap size={18} />
-                <span>Professor</span>
-              </Link>
-              <Link 
-                to="/team" 
-                className={`nav-link ${location.pathname === '/team' ? 'active' : ''}`}
-              >
-                <Users size={18} />
-                <span>Equipe</span>
-              </Link>
-              <Link 
-                to="/school" 
-                className={`nav-link ${location.pathname === '/school' ? 'active' : ''}`}
-              >
-                <School size={18} />
-                <span>Escola</span>
-              </Link>
+              {visibleItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className={`nav-link ${location.pathname === item.to ? 'active' : ''}`}
+                  >
+                    <Icon size={18} />
+                    <span>{item.label}</span>
+                  </Link>
+                )
+              })}
             </div>
           </div>
-          
-          <Link 
-            to="/admin" 
-            className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
-          >
-            <Settings size={18} />
-            <span>Admin</span>
-          </Link>
+
+          {user && (
+            <div className="nav-right">
+              <span className="nav-user-name">{user.name}</span>
+              <button className="nav-logout" onClick={handleLogout} title="Log out">
+                <LogOut size={18} />
+                <span>Log out</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>

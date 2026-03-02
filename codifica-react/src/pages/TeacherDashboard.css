@@ -395,5 +395,134 @@ h1 {
 
 .add-team-button:hover {
   transform: translateY(-3px);
-  
+
+}
+
+.english-track-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e3f2fd;
+  color: #1565c0;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Teacher Role Tag */
+.teacher-role-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: hsl(0, 0%, 35%);
+  margin-top: 4px;
+}
+
+/* English Track Notice */
+.english-track-notice {
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(35, 25%, 92%);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.english-track-notice svg {
+  color: hsl(35, 25%, 92%);
+  flex-shrink: 0;
+}
+
+/* Competency Analytics Section */
+.competency-section {
+  background: white;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.competency-desc {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.competency-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.competency-bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.competency-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: hsl(0, 0%, 5%);
+}
+
+.competency-value {
+  font-weight: 700;
+}
+
+.competency-bar {
+  background: #e0e0e0;
+  height: 12px;
+  overflow: hidden;
+}
+
+.competency-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.competency-teams-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+}
+
+.competency-team-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.competency-team-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: hsl(0, 0%, 5%);
+  min-width: 140px;
+}
+
+.competency-mini-bars {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+}
+
+.competency-mini {
+  flex: 1;
+  background: #e0e0e0;
+  height: 8px;
+  overflow: hidden;
+}
+
+.competency-mini-fill {
+  height: 100%;
+  transition: width 0.5s ease;
 }

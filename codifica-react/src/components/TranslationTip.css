@@ -1,0 +1,46 @@
+.translation-tip {
+  position: relative;
+  display: inline;
+  border-bottom: 1.5px dotted hsl(220, 60%, 50%);
+  cursor: help;
+  color: inherit;
+}
+
+.translation-tip-popup {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: hsl(0, 0%, 10%);
+  color: hsl(0, 0%, 95%);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.translation-tip-popup::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: hsl(0, 0%, 10%);
+}
+
+.translation-tip:hover .translation-tip-popup {
+  opacity: 1;
+  visibility: visible;
+}
+
+.translation-tip-pt {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}

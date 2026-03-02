@@ -240,14 +240,14 @@
 }
 
 .badges-list,
-.trophies-list {
+.distinctions-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
 .badge-item,
-.trophy-item {
+.distinction-item {
   background-color: hsl(35, 25%, 92%);
   padding: 16px;
   display: flex;
@@ -256,23 +256,32 @@
 }
 
 .badge-item strong,
-.trophy-item strong {
+.distinction-item strong {
   display: block;
   margin-bottom: 4px;
   font-weight: 700;
 }
 
 .badge-item p,
-.trophy-item p {
+.distinction-item p {
   margin: 4px 0;
   color: hsl(0, 0%, 35%);
   font-size: 0.875rem;
 }
 
 .badge-item small,
-.trophy-item small {
+.distinction-item small {
   color: hsl(0, 0%, 50%);
   font-size: 0.75rem;
+}
+
+.edit-form select {
+  padding: 8px 12px;
+  border: 1px solid hsl(0, 0%, 5%);
+  background-color: white;
+  color: hsl(0, 0%, 5%);
+  font-family: inherit;
+  font-size: 0.875rem;
 }
 
 .edit-form {

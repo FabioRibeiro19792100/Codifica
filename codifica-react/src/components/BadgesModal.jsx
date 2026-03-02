@@ -17,7 +17,7 @@ function BadgesModal({ isOpen, onClose, badges, title }) {
         </div>
         <div className="modal-body">
           {badges.length === 0 ? (
-            <p>Nenhum badge encontrado.</p>
+            <p>No badges found.</p>
           ) : (
             <div className="badges-list-modal">
               {badges.map((badge, index) => {
@@ -30,8 +30,11 @@ function BadgesModal({ isOpen, onClose, badges, title }) {
                     <div className="badge-info-modal">
                       <div className="badge-name-modal">{badge.name}</div>
                       <div className="badge-desc-modal">{badge.description}</div>
-                      {badge.phaseTitle && (
-                        <div className="badge-phase-modal">Fase: {badge.phaseTitle}</div>
+                      {badge.criteria && (
+                        <div className="badge-criteria-modal">Criteria: {badge.criteria}</div>
+                      )}
+                      {badge.stageTitle && (
+                        <div className="badge-phase-modal">Stage: {badge.stageTitle}</div>
                       )}
                     </div>
                   </div>

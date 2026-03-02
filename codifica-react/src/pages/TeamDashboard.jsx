@@ -1,19 +1,64 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { GraduationCap, Users, Globe, Trophy, Lightbulb, Calendar, Wrench, Mic, Award, Sparkles, BarChart3, Rocket, Target, FileText, MessageSquare, Leaf, Video, TreePine, Theater, Gift, Handshake, School, Megaphone, Radio, Zap, Star } from 'lucide-react'
+import { useParams } from 'react-router-dom'
+import { GraduationCap, Trophy, Languages } from 'lucide-react'
 import { loadGamificationData } from '../data/gamificationData'
 import { getIcon } from '../utils/iconMap'
+import TranslationTip from '../components/TranslationTip'
 import BadgesModal from '../components/BadgesModal'
 import ProgressModal from '../components/ProgressModal'
 import ShowcaseModal from '../components/ShowcaseModal'
 import Footer from '../components/Footer'
 import './TeamDashboard.css'
 
+const TEAMS_DATA = {
+  'ecotech-solutions': {
+    name: 'EcoTech Solutions',
+    teacher: 'Prof. Sarah Johnson',
+    currentStage: 2,
+    englishTrack: true,
+    englishTeacher: 'Prof. Sarah Johnson',
+    earnedBadgeIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    showcases: [
+      { title: 'Ideas in Motion Wall', description: 'Team highlighted on the public wall after completing the Strategic Plan with excellence.', date: 'March 25, 2026' },
+      { title: 'Prototypes on Display Wall', description: 'Prototype selected for the functional prototypes showcase wall.', date: 'April 20, 2026' },
+      { title: 'Weekly Spotlight', description: 'Weekly spotlight for high participation in workshops and office hours.', date: 'April 15, 2026' },
+    ],
+  },
+  'verde-futuro': {
+    name: 'Verde Futuro',
+    teacher: 'Prof. Sarah Johnson',
+    currentStage: 2,
+    englishTrack: true,
+    englishTeacher: 'Prof. Sarah Johnson',
+    earnedBadgeIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    showcases: [
+      { title: 'Ideas in Motion Wall', description: 'Team highlighted after Strategic Plan delivery.', date: 'March 25, 2026' },
+      { title: 'Weekly Spotlight', description: 'Weekly spotlight for engagement in office hours.', date: 'April 8, 2026' },
+    ],
+  },
+  'agua-limpa': {
+    name: 'Água Limpa',
+    teacher: 'Prof. Sarah Johnson',
+    currentStage: 1,
+    englishTrack: true,
+    englishTeacher: 'Prof. Sarah Johnson',
+    earnedBadgeIds: [1, 4, 5, 6],
+    showcases: [
+      { title: 'Ideas in Motion Wall', description: 'Team participated in the Strategic Plan stage public wall.', date: 'March 25, 2026' },
+    ],
+  },
+}
+
+const DEFAULT_TEAM = TEAMS_DATA['ecotech-solutions']
+
 function TeamDashboard() {
+  const { teamId } = useParams()
   const [data, setData] = useState(null)
   const [isBadgesModalOpen, setIsBadgesModalOpen] = useState(false)
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false)
   const [isShowcaseModalOpen, setIsShowcaseModalOpen] = useState(false)
+
+  const team = TEAMS_DATA[teamId] || DEFAULT_TEAM
 
   useEffect(() => {
     const loadData = () => {
@@ -28,44 +73,23 @@ function TeamDashboard() {
     }
   }, [])
 
-  if (!data) return <div>Carregando...</div>
+  if (!data) return <div>Loading...</div>
 
-  // Calcular progresso dinamicamente
-  const totalBadges = data.phases.reduce((sum, phase) => sum + phase.badges.length, 0)
-  
-  // Criar lista de todos os badges com informações de fase
-  const allBadges = data.phases.flatMap((phase, phaseIndex) => 
-    phase.badges.map((badge, badgeIndex) => ({
+  const totalBadges = data.stages.reduce((sum, stage) => sum + stage.badges.length, 0)
+
+  const allBadges = data.stages.flatMap((stage, stageIndex) =>
+    stage.badges.map((badge, badgeIndex) => ({
       ...badge,
-      phaseNumber: phase.number,
-      phaseTitle: phase.title,
-      phaseIndex,
+      stageNumber: stage.number,
+      stageTitle: stage.title,
+      stageIndex,
       badgeIndex,
-      globalIndex: data.phases.slice(0, phaseIndex).reduce((sum, p) => sum + p.badges.length, 0) + badgeIndex
+      globalIndex: data.stages.slice(0, stageIndex).reduce((sum, s) => sum + s.badges.length, 0) + badgeIndex
     }))
   )
-  
-  // Mock - fase atual da equipe e badges conquistados (em produção viria da API)
-  const currentPhaseNumber = 3 // Mock: equipe está na fase de Prototipagem
-  // Badges individuais conquistados - pode ter alguns da fase atual
-  // Exemplo: na Prototipagem, pode ter Workshop e Plantão, mas ainda não o Protótipo Concluído
-  // IDs: 1-3 (Fase 1 completa), 4-6 (Fase 2 completa), 8-9 (Fase 3 parcial - só Workshop e Plantão)
-  const earnedBadgeIds = [1, 2, 3, 4, 5, 6, 8, 9] // Mock: todos da fase 1 (3), todos da fase 2 (3), 2 da fase 3 (Workshop e Plantão)
-  
-  const earnedBadges = earnedBadgeIds.length
+
+  const earnedBadges = team.earnedBadgeIds.length
   const progress = Math.round((earnedBadges / totalBadges) * 100)
-  
-  // Calcular ranges de badges por fase
-  const phaseRanges = data.phases.map((phase, index) => {
-    const startBadge = index === 0 ? 1 : data.phases.slice(0, index).reduce((sum, p) => sum + p.badges.length, 0) + 1
-    const endBadge = startBadge + phase.badges.length - 1
-    return {
-      phase,
-      startBadge,
-      endBadge,
-      badgeCount: phase.badges.length
-    }
-  })
 
   return (
     <div className="team-dashboard">
@@ -73,78 +97,111 @@ function TeamDashboard() {
         <div className="team-info">
           <div className="team-header">
             <div>
-              <div className="team-name">Equipe EcoTech Solutions</div>
+              <div className="team-name">Team {team.name}</div>
               <div className="team-teacher">
                 <GraduationCap size={16} style={{display: 'inline', verticalAlign: 'middle', marginRight: '6px'}} />
-                Professor: Prof. Carlos Eduardo Silva
+                English Teacher: {team.teacher}
               </div>
             </div>
           </div>
+
+          {/* English Track Banner - fixed for all teams */}
+          <div className="english-track-banner">
+            <Languages size={18} style={{display: 'inline', verticalAlign: 'middle', marginRight: '8px'}} />
+            <span><strong>English Track</strong> — All deliveries must be in English • {team.englishTeacher}</span>
+          </div>
+
           <div className="stats">
             <div className="stat-item clickable" onClick={() => setIsBadgesModalOpen(true)}>
               <div className="stat-number">{earnedBadges}</div>
-              <div className="stat-label">Badges Conquistados</div>
+              <div className="stat-label"><TranslationTip pt="Insígnias digitais conquistadas">Badges Earned</TranslationTip></div>
             </div>
             <div className="stat-item clickable" onClick={() => setIsProgressModalOpen(true)}>
               <div className="stat-number">{progress}%</div>
-              <div className="stat-label">Jornada Completa</div>
+              <div className="stat-label">Complete Journey</div>
             </div>
             <div className="stat-item clickable" onClick={() => setIsShowcaseModalOpen(true)}>
-              <div className="stat-number">3</div>
-              <div className="stat-label">Vitrines Públicas</div>
+              <div className="stat-number">{team.showcases.length}</div>
+              <div className="stat-label"><TranslationTip pt="Vitrines Públicas — reconhecimentos públicos da equipe">Public Showcases</TranslationTip></div>
             </div>
           </div>
         </div>
-        
+
         <div className="badges-section">
           <h2 className="section-title">
-            <Trophy size={32} style={{display: 'inline', verticalAlign: 'middle', marginRight: '8px'}} /> Seus Badges
+            <Trophy size={32} style={{display: 'inline', verticalAlign: 'middle', marginRight: '8px'}} /> Your <TranslationTip pt="Insígnias — conquistas desbloqueadas ao longo do programa">Badges</TranslationTip>
           </h2>
-          
-          {data.phases.map((phase, phaseIdx) => {
-            const PhaseIcon = getIcon(phase.icon)
-            
+
+          {data.stages.map((stage, stageIdx) => {
+            const StageIcon = getIcon(stage.icon)
+            const categoryOrder = ['participacao', 'conclusao', 'conquista_especial', 'pedagogica']
+            const badgesByCategory = categoryOrder
+              .map(cat => ({
+                key: cat,
+                ...(data.badgeCategories[cat] || {}),
+                badges: stage.badges.filter(b => b.category === cat)
+              }))
+              .filter(group => group.badges.length > 0)
+
             return (
-              <div key={phase.id}>
-                <div style={{margin: phaseIdx === 0 ? '0 0 30px 0' : '40px 0 30px 0'}}>
-                  <span className="phase-indicator">
-                    <PhaseIcon size={16} style={{display: 'inline', verticalAlign: 'middle', marginRight: '6px'}} /> {phase.title}
+              <div key={stage.id}>
+                <div style={{margin: stageIdx === 0 ? '0 0 30px 0' : '40px 0 30px 0'}}>
+                  <span className="stage-indicator">
+                    <StageIcon size={16} style={{display: 'inline', verticalAlign: 'middle', marginRight: '6px'}} /> {stage.title}
                   </span>
                 </div>
-                
-                <div className="badges-grid">
-                  {phase.badges.map((badge) => {
-                    const BadgeIcon = getIcon(badge.icon)
-                    // Badge conquistado baseado na lista individual de badges conquistados
-                    const isEarned = earnedBadgeIds.includes(badge.id)
-                    
-                    return (
-                      <div key={badge.id} className={`badge-card ${isEarned ? 'earned' : 'locked'}`}>
-                        <div className="badge-icon">
-                          <BadgeIcon size={48} />
-                        </div>
-                        <div className="badge-name">{badge.name}</div>
-                        <div className="badge-description">{badge.description}</div>
-                      </div>
-                    )
-                  })}
-                </div>
+
+                {badgesByCategory.map((group) => (
+                  <div key={group.key} className="badge-category-group" style={{borderLeft: `3px solid ${group.color || '#999'}`, paddingLeft: '16px', marginBottom: '24px'}}>
+                    <div className="badge-category-header" style={{fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: group.color || '#666', marginBottom: '12px'}}>
+                      {group.label}
+                    </div>
+                    <div className="badges-grid">
+                      {group.badges.map((badge) => {
+                        const BadgeIcon = getIcon(badge.icon)
+                        const isEarned = team.earnedBadgeIds.includes(badge.id)
+
+                        return (
+                          <div key={badge.id} className={`badge-card ${isEarned ? 'earned' : 'locked'}`}>
+                            <div className="badge-icon">
+                              <BadgeIcon size={48} />
+                            </div>
+                            <div className="badge-name">{badge.name}</div>
+                            <div className="badge-description">{badge.description}</div>
+                            {/* Tooltip on hover */}
+                            <div className="badge-card-tooltip">
+                              <div className="badge-card-tooltip-title">{badge.name}</div>
+                              <div className="badge-card-tooltip-desc">{badge.description}</div>
+                              {badge.criteria && (
+                                <div className="badge-card-tooltip-criteria">
+                                  <strong>Criteria:</strong> {badge.criteria}
+                                </div>
+                              )}
+                              {badge.sdgTag && (
+                                <div className="badge-card-tooltip-sdg">{badge.sdgTag}</div>
+                              )}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
             )
           })}
         </div>
-        
+
       </div>
 
-      {/* Mock data for earned badges */}
       {(() => {
-        const earnedBadgeList = allBadges.filter(badge => earnedBadgeIds.includes(badge.id))
+        const earnedBadgeList = allBadges.filter(badge => team.earnedBadgeIds.includes(badge.id))
         return (
           <BadgesModal
             isOpen={isBadgesModalOpen}
             onClose={() => setIsBadgesModalOpen(false)}
             badges={earnedBadgeList}
-            title="Badges Conquistados"
+            title="Badges Earned"
           />
         )
       })()}
@@ -155,34 +212,18 @@ function TeamDashboard() {
         progressData={{
           average: progress,
           teams: [{
-            name: "EcoTech Solutions",
+            name: team.name,
             progress: progress
           }]
         }}
-        title="Jornada Completa"
+        title="Complete Journey"
       />
 
       <ShowcaseModal
         isOpen={isShowcaseModalOpen}
         onClose={() => setIsShowcaseModalOpen(false)}
-        showcases={[
-          {
-            title: "Mural Ideias em Movimento",
-            description: "Sua equipe foi destaque no mural público após a conclusão da fase de Ideação com excelência.",
-            date: "25 de Março, 2026"
-          },
-          {
-            title: "Mural Protótipos no Ar",
-            description: "O protótipo da sua equipe foi selecionado para o mural de protótipos funcionais.",
-            date: "20 de Abril, 2026"
-          },
-          {
-            title: "Destaque Semanal",
-            description: "Equipe EcoTech Solutions foi destaque da semana por alta participação em workshops e plantões.",
-            date: "15 de Abril, 2026"
-          }
-        ]}
-        title="Vitrines Públicas"
+        showcases={team.showcases}
+        title="Public Showcases"
       />
       <Footer />
     </div>

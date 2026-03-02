@@ -50,7 +50,7 @@ function CalendarModal({ isOpen, onClose, events, title }) {
             </div>
           ) : (
             <div className="no-events">
-              <p>Nenhum evento agendado.</p>
+              <p>No events scheduled.</p>
             </div>
           )}
         </div>

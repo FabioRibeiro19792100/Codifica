@@ -16,7 +16,7 @@ function MessagesModal({ isOpen, onClose, messages, title }) {
         </div>
         <div className="modal-body">
           {messages.length === 0 ? (
-            <p>Nenhuma mensagem encontrada.</p>
+            <p>No messages found.</p>
           ) : (
             <div className="messages-list-modal">
               {messages.map((message, index) => {

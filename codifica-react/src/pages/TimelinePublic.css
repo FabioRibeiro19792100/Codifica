@@ -729,3 +729,182 @@ h1 {
   color: hsl(0, 0%, 35%);
   font-weight: 300;
 }
+
+/* English Hero Banner */
+.english-hero-banner {
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(35, 25%, 92%);
+  padding: 40px;
+  margin-top: 32px;
+  margin-bottom: 48px;
+}
+
+.english-hero-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.english-hero-content > svg {
+  flex-shrink: 0;
+  color: hsl(35, 25%, 92%);
+}
+
+.english-hero-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: lowercase;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .english-hero-title {
+    font-size: 2.5rem;
+  }
+}
+
+.english-hero-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 300;
+  color: hsl(35, 15%, 80%);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .english-hero-desc {
+    font-size: 1.125rem;
+  }
+}
+
+/* Success Stories Section */
+.stories-section {
+  margin-top: 48px;
+  margin-bottom: 64px;
+}
+
+.stories-intro {
+  font-size: 1.125rem;
+  color: hsl(0, 0%, 35%);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 720px;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .stories-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+
+.story-card {
+  background-color: hsl(35, 20%, 85%);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.story-avatar {
+  width: 56px;
+  height: 56px;
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(35, 25%, 92%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.story-content {
+  flex: 1;
+}
+
+.story-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+  margin-bottom: 4px;
+}
+
+.story-role {
+  font-size: 0.875rem;
+  color: hsl(0, 0%, 35%);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.story-quote {
+  font-size: 0.9rem;
+  color: hsl(0, 0%, 25%);
+  line-height: 1.6;
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.story-highlight {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+  padding: 8px 12px;
+  background-color: hsl(35, 25%, 92%);
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.story-sdg-tag {
+  font-size: 0.8rem;
+  color: hsl(0, 0%, 35%);
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Coexistence Rules Section */
+.coexistence-section {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.coexistence-content {
+  padding: 0;
+}
+
+.coexistence-notice {
+  background-color: hsl(35, 20%, 85%);
+  padding: 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.coexistence-notice > svg {
+  flex-shrink: 0;
+  color: hsl(0, 0%, 35%);
+  margin-top: 2px;
+}
+
+.coexistence-notice strong {
+  font-size: 1.125rem;
+  color: hsl(0, 0%, 5%);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.coexistence-notice p {
+  font-size: 0.95rem;
+  color: hsl(0, 0%, 35%);
+  line-height: 1.6;
+  font-weight: 300;
+  margin: 0;
+}

@@ -7,11 +7,10 @@ import './AdminDashboard.css'
 function AdminDashboard() {
   const [data, setData] = useState(null)
   const [editing, setEditing] = useState(null)
-  const [editingType, setEditingType] = useState(null) // 'phase', 'badge', 'trophy', 'activity'
+  const [editingType, setEditingType] = useState(null) // 'stage', 'badge', 'distinction', 'activity'
   const [formData, setFormData] = useState({})
 
   useEffect(() => {
-    // Carrega dados salvos ou usa os padrão
     const loadedData = loadGamificationData()
     setData(loadedData)
   }, [])
@@ -20,7 +19,7 @@ function AdminDashboard() {
     return (
       <div className="admin-dashboard">
         <div className="container">
-          <div style={{ padding: '48px 0', textAlign: 'left' }}>Carregando...</div>
+          <div style={{ padding: '48px 0', textAlign: 'left' }}>Loading...</div>
         </div>
       </div>
     )
@@ -28,7 +27,7 @@ function AdminDashboard() {
 
   const handleSave = () => {
     saveGamificationData(data)
-    alert('Dados salvos com sucesso! As outras páginas serão atualizadas automaticamente.')
+    alert('Data saved successfully! Other pages will be updated automatically.')
   }
 
   const handleEdit = (item, type, parentId = null) => {
@@ -45,109 +44,105 @@ function AdminDashboard() {
 
   const handleSaveEdit = () => {
     const newData = { ...data }
-    
-    if (editingType === 'phase') {
-      const index = newData.phases.findIndex(p => p.id === editing.id)
+
+    if (editingType === 'stage') {
+      const index = newData.stages.findIndex(s => s.id === editing.id)
       if (index !== -1) {
-        newData.phases[index] = { ...newData.phases[index], ...formData }
+        newData.stages[index] = { ...newData.stages[index], ...formData }
       }
     } else if (editingType === 'badge') {
-      const phaseIndex = newData.phases.findIndex(p => p.id === editing.parentId)
-      if (phaseIndex !== -1) {
-        const badgeIndex = newData.phases[phaseIndex].badges.findIndex(b => b.id === editing.id)
+      const stageIndex = newData.stages.findIndex(s => s.id === editing.parentId)
+      if (stageIndex !== -1) {
+        const badgeIndex = newData.stages[stageIndex].badges.findIndex(b => b.id === editing.id)
         if (badgeIndex !== -1) {
-          newData.phases[phaseIndex].badges[badgeIndex] = { ...newData.phases[phaseIndex].badges[badgeIndex], ...formData }
+          newData.stages[stageIndex].badges[badgeIndex] = { ...newData.stages[stageIndex].badges[badgeIndex], ...formData }
         }
       }
-    } else if (editingType === 'trophy') {
+    } else if (editingType === 'distinction') {
       if (editing.parentId) {
-        // Troféu dentro de uma fase
-        const phaseIndex = newData.phases.findIndex(p => p.id === editing.parentId)
-        if (phaseIndex !== -1) {
-          const trophyIndex = newData.phases[phaseIndex].trophies.findIndex(t => t.name === editing.id)
-          if (trophyIndex !== -1) {
-            newData.phases[phaseIndex].trophies[trophyIndex] = { ...newData.phases[phaseIndex].trophies[trophyIndex], ...formData }
+        const stageIndex = newData.stages.findIndex(s => s.id === editing.parentId)
+        if (stageIndex !== -1) {
+          const distinctionIndex = newData.stages[stageIndex].distinctions.findIndex(d => d.name === editing.id)
+          if (distinctionIndex !== -1) {
+            newData.stages[stageIndex].distinctions[distinctionIndex] = { ...newData.stages[stageIndex].distinctions[distinctionIndex], ...formData }
           }
         }
       } else {
-        // Troféu global
-        const trophyIndex = newData.allTrophies.findIndex(t => t.id === editing.id)
-        if (trophyIndex !== -1) {
-          newData.allTrophies[trophyIndex] = { ...newData.allTrophies[trophyIndex], ...formData }
+        const distinctionIndex = newData.allDistinctions.findIndex(d => d.id === editing.id)
+        if (distinctionIndex !== -1) {
+          newData.allDistinctions[distinctionIndex] = { ...newData.allDistinctions[distinctionIndex], ...formData }
         }
       }
     } else if (editingType === 'activity') {
-      const phaseIndex = newData.phases.findIndex(p => p.id === editing.parentId)
-      if (phaseIndex !== -1) {
-        newData.phases[phaseIndex].activities[editing.id] = formData.text
+      const stageIndex = newData.stages.findIndex(s => s.id === editing.parentId)
+      if (stageIndex !== -1) {
+        newData.stages[stageIndex].activities[editing.id] = formData.text
       }
     }
-    
+
     setData(newData)
-    // Salva automaticamente após cada edição
     saveGamificationData(newData)
     handleCancel()
   }
 
   const handleDelete = (item, type, parentId = null) => {
-    if (!confirm(`Tem certeza que deseja excluir este ${type}?`)) return
-    
+    if (!confirm(`Are you sure you want to delete this ${type === 'stage' ? 'stage' : type === 'distinction' ? 'distinction' : type}?`)) return
+
     const newData = { ...data }
-    
-    if (type === 'phase') {
-      newData.phases = newData.phases.filter(p => p.id !== item.id)
+
+    if (type === 'stage') {
+      newData.stages = newData.stages.filter(s => s.id !== item.id)
     } else if (type === 'badge') {
-      const phaseIndex = newData.phases.findIndex(p => p.id === parentId)
-      if (phaseIndex !== -1) {
-        newData.phases[phaseIndex].badges = newData.phases[phaseIndex].badges.filter(b => b.id !== item.id)
+      const stageIndex = newData.stages.findIndex(s => s.id === parentId)
+      if (stageIndex !== -1) {
+        newData.stages[stageIndex].badges = newData.stages[stageIndex].badges.filter(b => b.id !== item.id)
       }
-    } else if (type === 'trophy') {
+    } else if (type === 'distinction') {
       if (parentId) {
-        const phaseIndex = newData.phases.findIndex(p => p.id === parentId)
-        if (phaseIndex !== -1) {
-          newData.phases[phaseIndex].trophies = newData.phases[phaseIndex].trophies.filter(t => t.name !== item.name)
+        const stageIndex = newData.stages.findIndex(s => s.id === parentId)
+        if (stageIndex !== -1) {
+          newData.stages[stageIndex].distinctions = newData.stages[stageIndex].distinctions.filter(d => d.name !== item.name)
         }
       } else {
-        newData.allTrophies = newData.allTrophies.filter(t => t.id !== item.id)
+        newData.allDistinctions = newData.allDistinctions.filter(d => d.id !== item.id)
       }
     } else if (type === 'activity') {
-      const phaseIndex = newData.phases.findIndex(p => p.id === parentId)
-      if (phaseIndex !== -1) {
-        // item pode ser um índice numérico
+      const stageIndex = newData.stages.findIndex(s => s.id === parentId)
+      if (stageIndex !== -1) {
         const indexToDelete = typeof item === 'number' ? item : item.id
-        newData.phases[phaseIndex].activities = newData.phases[phaseIndex].activities.filter((_, i) => i !== indexToDelete)
+        newData.stages[stageIndex].activities = newData.stages[stageIndex].activities.filter((_, i) => i !== indexToDelete)
       }
     }
-    
+
     setData(newData)
-    // Salva automaticamente após cada exclusão
     saveGamificationData(newData)
   }
 
   const handleAdd = (type, parentId = null) => {
     if (type === 'badge') {
-      const phaseIndex = data.phases.findIndex(p => p.id === parentId)
-      if (phaseIndex !== -1) {
+      const stageIndex = data.stages.findIndex(s => s.id === parentId)
+      if (stageIndex !== -1) {
         const newBadge = {
           id: Date.now(),
-          name: "Novo Badge",
+          name: "New Badge",
           icon: "Award",
-          description: "Descrição do badge"
+          description: "Badge description",
+          category: "participacao"
         }
         const newData = { ...data }
-        newData.phases[phaseIndex].badges.push(newBadge)
+        newData.stages[stageIndex].badges.push(newBadge)
         setData(newData)
         saveGamificationData(newData)
         handleEdit(newBadge, 'badge', parentId)
       }
     } else if (type === 'activity') {
-      const phaseIndex = data.phases.findIndex(p => p.id === parentId)
-      if (phaseIndex !== -1) {
+      const stageIndex = data.stages.findIndex(s => s.id === parentId)
+      if (stageIndex !== -1) {
         const newData = { ...data }
-        newData.phases[phaseIndex].activities.push("Nova atividade")
+        newData.stages[stageIndex].activities.push("New activity")
         setData(newData)
         saveGamificationData(newData)
-        handleEdit({ id: newData.phases[phaseIndex].activities.length - 1, text: "Nova atividade" }, 'activity', parentId)
+        handleEdit({ id: newData.stages[stageIndex].activities.length - 1, text: "New activity" }, 'activity', parentId)
       }
     }
   }
@@ -156,76 +151,74 @@ function AdminDashboard() {
     <div className="admin-dashboard">
       <div className="container">
         <header className="admin-header">
-          <h1>Painel de Administração</h1>
-          <p>Gerencie fases, badges, troféus e atividades do sistema</p>
+          <h1>Administration Panel</h1>
+          <p>Manage stages, badges, distinctions, and activities of the STEM + English program</p>
         </header>
-        
-        {/* Botão fixo de salvar */}
+
         <button className="btn-save-fixed" onClick={handleSave}>
-          <Save size={18} /> Salvar Todas as Alterações
+          <Save size={18} /> Save All Changes
         </button>
 
         <div className="admin-content">
-          {/* Fases */}
           <section className="admin-section">
-            <h2>Fases do Programa</h2>
-            {data.phases.map(phase => (
-              <div key={phase.id} className="admin-card">
+            <h2>Program Stages</h2>
+            {data.stages.map(stage => (
+              <div key={stage.id} className="admin-card">
                 <div className="admin-card-header">
                   <div>
-                    <h3>Fase {phase.number}: {phase.title}</h3>
-                    <p>{phase.subtitle} • {phase.dateRange}</p>
+                    <h3>Stage {stage.number}: {stage.title}</h3>
+                    <p>{stage.subtitle} • {stage.dateRange}</p>
                   </div>
                   <div className="admin-actions">
-                    <button onClick={() => handleEdit(phase, 'phase')} className="btn-edit">
-                      <Edit2 size={16} /> Editar
+                    <button onClick={() => handleEdit(stage, 'stage')} className="btn-edit">
+                      <Edit2 size={16} /> Edit
                     </button>
                   </div>
                 </div>
 
-                {editing && editing.id === phase.id && editingType === 'phase' ? (
+                {editing && editing.id === stage.id && editingType === 'stage' ? (
                   <div className="edit-form">
                     <input
                       type="text"
                       value={formData.title || ''}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                      placeholder="Título da fase"
+                      placeholder="Stage title"
                     />
                     <input
                       type="text"
                       value={formData.subtitle || ''}
                       onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
-                      placeholder="Subtítulo"
+                      placeholder="Subtitle"
                     />
                     <input
                       type="text"
                       value={formData.dateRange || ''}
                       onChange={(e) => setFormData({ ...formData, dateRange: e.target.value })}
-                      placeholder="Período"
+                      placeholder="Date range"
                     />
                     <textarea
                       value={formData.rewards || ''}
                       onChange={(e) => setFormData({ ...formData, rewards: e.target.value })}
-                      placeholder="Recompensas"
+                      placeholder="Rewards"
                     />
                     <div className="form-actions">
-                      <button onClick={handleSaveEdit} className="btn-save-small">Salvar</button>
-                      <button onClick={handleCancel} className="btn-cancel">Cancelar</button>
+                      <button onClick={handleSaveEdit} className="btn-save-small">Save</button>
+                      <button onClick={handleCancel} className="btn-cancel">Cancel</button>
                     </div>
                   </div>
                 ) : (
                   <>
                     <div className="admin-subsection">
                       <div className="subsection-header">
-                        <h4>Atividades</h4>
-                        <button onClick={() => handleAdd('activity', phase.id)} className="btn-add-small">
-                          <Plus size={14} /> Adicionar
+                        <h4>Activities</h4>
+                        <button onClick={() => handleAdd('activity', stage.id)} className="btn-add-small">
+                          <Plus size={14} /> Add
                         </button>
                       </div>
                       <ul>
-                        {phase.activities.map((activity, idx) => (
+                        {stage.activities.map((activity, idx) => (
                           <li key={idx}>
-                            {editing && editing.id === idx && editingType === 'activity' && editing.parentId === phase.id ? (
+                            {editing && editing.id === idx && editingType === 'activity' && editing.parentId === stage.id ? (
                               <div className="edit-form-inline">
                                 <input
                                   type="text"
@@ -240,10 +233,10 @@ function AdminDashboard() {
                               <>
                                 {activity}
                                 <div className="item-actions">
-                                  <button onClick={() => handleEdit({ id: idx, text: activity }, 'activity', phase.id)} className="btn-edit-small">
+                                  <button onClick={() => handleEdit({ id: idx, text: activity }, 'activity', stage.id)} className="btn-edit-small">
                                     <Edit2 size={12} />
                                   </button>
-                                  <button onClick={() => handleDelete(idx, 'activity', phase.id)} className="btn-delete-small">
+                                  <button onClick={() => handleDelete(idx, 'activity', stage.id)} className="btn-delete-small">
                                     <Trash2 size={12} />
                                   </button>
                                 </div>
@@ -257,35 +250,49 @@ function AdminDashboard() {
                     <div className="admin-subsection">
                       <div className="subsection-header">
                         <h4>Badges</h4>
-                        <button onClick={() => handleAdd('badge', phase.id)} className="btn-add-small">
-                          <Plus size={14} /> Adicionar
+                        <button onClick={() => handleAdd('badge', stage.id)} className="btn-add-small">
+                          <Plus size={14} /> Add
                         </button>
                       </div>
                       <div className="badges-list">
-                        {phase.badges.map(badge => (
+                        {stage.badges.map(badge => (
                           <div key={badge.id} className="badge-item">
-                            {editing && editing.id === badge.id && editingType === 'badge' && editing.parentId === phase.id ? (
+                            {editing && editing.id === badge.id && editingType === 'badge' && editing.parentId === stage.id ? (
                               <div className="edit-form">
                                 <input
                                   type="text"
                                   value={formData.name || ''}
                                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                  placeholder="Nome do badge"
+                                  placeholder="Badge name"
                                 />
                                 <input
                                   type="text"
                                   value={formData.icon || ''}
                                   onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                                  placeholder="Ícone (nome do componente Lucide)"
+                                  placeholder="Icon (Lucide component name)"
                                 />
                                 <textarea
                                   value={formData.description || ''}
                                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                  placeholder="Descrição"
+                                  placeholder="Description"
                                 />
+                                <textarea
+                                  value={formData.criteria || ''}
+                                  onChange={(e) => setFormData({ ...formData, criteria: e.target.value })}
+                                  placeholder="Criteria for achievement (shown in tooltip)"
+                                />
+                                <select
+                                  value={formData.category || 'participacao'}
+                                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                >
+                                  <option value="participacao">Workshop & Event Participation</option>
+                                  <option value="conclusao">Delivery Completion</option>
+                                  <option value="conquista_especial">Special Achievements</option>
+                                  <option value="pedagogica">Pedagogical Badges (STEM + SDG)</option>
+                                </select>
                                 <div className="form-actions">
-                                  <button onClick={handleSaveEdit} className="btn-save-small">Salvar</button>
-                                  <button onClick={handleCancel} className="btn-cancel">Cancelar</button>
+                                  <button onClick={handleSaveEdit} className="btn-save-small">Save</button>
+                                  <button onClick={handleCancel} className="btn-cancel">Cancel</button>
                                 </div>
                               </div>
                             ) : (
@@ -293,13 +300,14 @@ function AdminDashboard() {
                                 <div>
                                   <strong>{badge.name}</strong>
                                   <p>{badge.description}</p>
-                                  <small>Ícone: {badge.icon}</small>
+                                  {badge.criteria && <p style={{fontSize: '0.85em', color: '#555'}}><em>Criteria: {badge.criteria}</em></p>}
+                                  <small>Icon: {badge.icon} • Category: {badge.category || 'N/A'}</small>
                                 </div>
                                 <div className="item-actions">
-                                  <button onClick={() => handleEdit(badge, 'badge', phase.id)} className="btn-edit-small">
+                                  <button onClick={() => handleEdit(badge, 'badge', stage.id)} className="btn-edit-small">
                                     <Edit2 size={12} />
                                   </button>
-                                  <button onClick={() => handleDelete(badge, 'badge', phase.id)} className="btn-delete-small">
+                                  <button onClick={() => handleDelete(badge, 'badge', stage.id)} className="btn-delete-small">
                                     <Trash2 size={12} />
                                   </button>
                                 </div>
@@ -311,40 +319,40 @@ function AdminDashboard() {
                     </div>
 
                     <div className="admin-subsection">
-                      <h4>Troféus</h4>
-                      <div className="trophies-list">
-                        {phase.trophies.map((trophy, idx) => (
-                          <div key={idx} className="trophy-item">
-                            {editing && editing.id === trophy.name && editingType === 'trophy' && editing.parentId === phase.id ? (
+                      <h4>Distinctions</h4>
+                      <div className="distinctions-list">
+                        {stage.distinctions.map((distinction, idx) => (
+                          <div key={idx} className="distinction-item">
+                            {editing && editing.id === distinction.name && editingType === 'distinction' && editing.parentId === stage.id ? (
                               <div className="edit-form">
                                 <input
                                   type="text"
                                   value={formData.name || ''}
                                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                  placeholder="Nome do troféu"
+                                  placeholder="Distinction name"
                                 />
                                 <input
                                   type="text"
                                   value={formData.criteria || ''}
                                   onChange={(e) => setFormData({ ...formData, criteria: e.target.value })}
-                                  placeholder="Critérios"
+                                  placeholder="Criteria"
                                 />
                                 <div className="form-actions">
-                                  <button onClick={handleSaveEdit} className="btn-save-small">Salvar</button>
-                                  <button onClick={handleCancel} className="btn-cancel">Cancelar</button>
+                                  <button onClick={handleSaveEdit} className="btn-save-small">Save</button>
+                                  <button onClick={handleCancel} className="btn-cancel">Cancel</button>
                                 </div>
                               </div>
                             ) : (
                               <>
                                 <div>
-                                  <strong>{trophy.name}</strong>
-                                  <p>{trophy.criteria}</p>
+                                  <strong>{distinction.name}</strong>
+                                  <p>{distinction.criteria}</p>
                                 </div>
                                 <div className="item-actions">
-                                  <button onClick={() => handleEdit(trophy, 'trophy', phase.id)} className="btn-edit-small">
+                                  <button onClick={() => handleEdit(distinction, 'distinction', stage.id)} className="btn-edit-small">
                                     <Edit2 size={12} />
                                   </button>
-                                  <button onClick={() => handleDelete(trophy, 'trophy', phase.id)} className="btn-delete-small">
+                                  <button onClick={() => handleDelete(distinction, 'distinction', stage.id)} className="btn-delete-small">
                                     <Trash2 size={12} />
                                   </button>
                                 </div>
@@ -360,49 +368,56 @@ function AdminDashboard() {
             ))}
           </section>
 
-          {/* Troféus Globais */}
           <section className="admin-section">
-            <h2>Troféus Escolares (Globais)</h2>
-            {data.allTrophies.map(trophy => (
-              <div key={trophy.id} className="admin-card">
-                {editing && editing.id === trophy.id && editingType === 'trophy' && !editing.parentId ? (
+            <h2>Institutional Distinctions</h2>
+            {data.allDistinctions.map(distinction => (
+              <div key={distinction.id} className="admin-card">
+                {editing && editing.id === distinction.id && editingType === 'distinction' && !editing.parentId ? (
                   <div className="edit-form">
                     <input
                       type="text"
                       value={formData.name || ''}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Nome do troféu"
+                      placeholder="Distinction name"
                     />
                     <textarea
                       value={formData.description || ''}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      placeholder="Descrição"
+                      placeholder="Description"
                     />
                     <input
                       type="text"
                       value={formData.criteria || ''}
                       onChange={(e) => setFormData({ ...formData, criteria: e.target.value })}
-                      placeholder="Critérios"
+                      placeholder="Criteria"
                     />
+                    <select
+                      value={formData.type || 'certificado_digital'}
+                      onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                    >
+                      <option value="certificado_digital">Digital Certificate</option>
+                      <option value="selo_reconhecimento">Recognition Seal</option>
+                      <option value="mencao_honrosa">Honorable Mention</option>
+                    </select>
                     <div className="form-actions">
-                      <button onClick={handleSaveEdit} className="btn-save-small">Salvar</button>
-                      <button onClick={handleCancel} className="btn-cancel">Cancelar</button>
+                      <button onClick={handleSaveEdit} className="btn-save-small">Save</button>
+                      <button onClick={handleCancel} className="btn-cancel">Cancel</button>
                     </div>
                   </div>
                 ) : (
                   <>
                     <div className="admin-card-header">
                       <div>
-                        <h3>{trophy.name}</h3>
-                        <p>{trophy.description}</p>
-                        <small>Critérios: {trophy.criteria}</small>
+                        <h3>{distinction.name}</h3>
+                        <p>{distinction.description}</p>
+                        <small>Criteria: {distinction.criteria} • Type: {distinction.type || 'N/A'}</small>
                       </div>
                       <div className="admin-actions">
-                        <button onClick={() => handleEdit(trophy, 'trophy')} className="btn-edit">
-                          <Edit2 size={16} /> Editar
+                        <button onClick={() => handleEdit(distinction, 'distinction')} className="btn-edit">
+                          <Edit2 size={16} /> Edit
                         </button>
-                        <button onClick={() => handleDelete(trophy, 'trophy')} className="btn-delete">
-                          <Trash2 size={16} /> Excluir
+                        <button onClick={() => handleDelete(distinction, 'distinction')} className="btn-delete">
+                          <Trash2 size={16} /> Delete
                         </button>
                       </div>
                     </div>

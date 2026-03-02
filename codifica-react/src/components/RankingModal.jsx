@@ -18,26 +18,26 @@ function RankingModal({ isOpen, onClose, rankingData, title }) {
           <div className="ranking-info-modal">
             <div className="ranking-position-large">
               <div className="position-number">{rankingData.position}</div>
-              <div className="position-label">Posição no Ranking</div>
+              <div className="position-label">Ranking Position</div>
             </div>
             {rankingData.details && (
               <div className="ranking-details">
-                <p><strong>Escola:</strong> {rankingData.details.school}</p>
-                <p><strong>Região:</strong> {rankingData.details.region}</p>
-                <p><strong>Total de Pontos:</strong> {rankingData.details.points}</p>
-                <p><strong>Equipes Ativas:</strong> {rankingData.details.teams}</p>
-                <p><strong>Troféus Conquistados:</strong> {rankingData.details.trophies}</p>
+                <p><strong>School:</strong> {rankingData.details.school}</p>
+                <p><strong>Region:</strong> {rankingData.details.region}</p>
+                <p><strong>Total Points:</strong> {rankingData.details.points}</p>
+                <p><strong>Active Teams:</strong> {rankingData.details.teams}</p>
+                <p><strong>Distinctions Earned:</strong> {rankingData.details.distinctions}</p>
               </div>
             )}
             {rankingData.comparison && (
               <div className="ranking-comparison">
-                <h3>Comparação com o Top 3</h3>
+                <h3>Top 3 Comparison</h3>
                 <div className="comparison-list">
                   {rankingData.comparison.map((item, index) => (
                     <div key={index} className="comparison-item">
                       <div className="comparison-position">{item.position}</div>
                       <div className="comparison-school">{item.school}</div>
-                      <div className="comparison-points">{item.points} pontos</div>
+                      <div className="comparison-points">{item.points} points</div>
                     </div>
                   ))}
                 </div>

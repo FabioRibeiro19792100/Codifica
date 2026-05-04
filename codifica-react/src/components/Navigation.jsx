@@ -1,10 +1,11 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Globe, GraduationCap, School, Settings, LogOut } from 'lucide-react'
+import { Globe, GraduationCap, School, Settings, LogOut, BookOpen } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import './Navigation.css'
 
 const NAV_ITEMS = [
   { to: '/timeline', icon: Globe, label: 'Timeline', roles: ['professor', 'gestor', 'admin'] },
+  { to: '/classes', icon: BookOpen, label: 'Classes', roles: ['professor', 'gestor', 'admin'] },
   { to: '/teacher', icon: GraduationCap, label: 'Dashboard', roles: ['professor', 'admin'] },
   { to: '/school', icon: School, label: 'Dashboard', roles: ['gestor', 'admin'] },
   { to: '/admin', icon: Settings, label: 'Admin', roles: ['admin'] },
@@ -32,7 +33,7 @@ function Navigation() {
           <div className="nav-left">
             <div className="nav-logo-wrapper">
               <Link to="/" className="nav-logo">
-                <span>codifica+</span>
+                <span>GO UP!</span>
                 <span className="nav-year">2026</span>
               </Link>
             </div>

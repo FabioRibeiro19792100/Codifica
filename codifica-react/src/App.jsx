@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import TimelinePublic from './pages/TimelinePublic'
 import TeacherDashboard from './pages/TeacherDashboard'
 import TeamDashboard from './pages/TeamDashboard'
+import ClassesDashboard from './pages/ClassesDashboard'
 import SchoolDashboard from './pages/SchoolDashboard'
 import AdminDashboard from './pages/AdminDashboard'
 import NotFound from './pages/NotFound'
@@ -45,6 +46,13 @@ function App() {
           <Route path="/team/:teamId" element={
             <ProtectedRoute allowedRoles={['professor', 'admin']}>
               <AppLayout><TeamDashboard /></AppLayout>
+            </ProtectedRoute>
+          } />
+
+          {/* Turmas (professor + gestor + admin) */}
+          <Route path="/classes" element={
+            <ProtectedRoute allowedRoles={['professor', 'gestor', 'admin']}>
+              <AppLayout><ClassesDashboard /></AppLayout>
             </ProtectedRoute>
           } />
 

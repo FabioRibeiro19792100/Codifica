@@ -482,7 +482,7 @@ function TeacherDashboard() {
         messages={[
           {
             type: 'info',
-            title: 'Welcome to Codifica+ 2026 — STEM and English!',
+            title: 'Welcome to GO UP! 2026 — Growing Opportunities Unlocking Potential!',
             body: 'We are very happy to have you with us on this journey. As an English teacher leader, you are essential to guiding your teams in their English deliveries. Track progress and encourage participation in all workshops.',
             date: 'February 15, 2026'
           },

@@ -13,7 +13,7 @@ export default {
         background: 'hsl(35, 25%, 92%)',
         foreground: 'hsl(0, 0%, 5%)',
         primary: {
-          DEFAULT: 'hsl(252, 70%, 65%)', // Roxo do Codifica+
+          DEFAULT: 'hsl(252, 70%, 65%)', // Roxo GO UP!
           foreground: 'hsl(35, 25%, 92%)',
         },
         secondary: {

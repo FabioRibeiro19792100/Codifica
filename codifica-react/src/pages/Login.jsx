@@ -43,9 +43,9 @@ function Login() {
     <div className="login-page">
       <div className="login-container">
         <div className="login-header">
-          <h1 className="login-title">codifica+</h1>
+          <h1 className="login-title">GO UP!</h1>
           <p className="login-year">2026</p>
-          <p className="login-subtitle">STEM and English can change your life</p>
+          <p className="login-subtitle">Growing Opportunities Unlocking Potential</p>
         </div>
 
         <div className="login-form">
@@ -82,7 +82,7 @@ function Login() {
         </div>
 
         <div className="login-footer">
-          <p>Codifica+ 2026 • British Council & Mastertech</p>
+          <p>GO UP! 2026 • British Council & Mastertech</p>
         </div>
       </div>
     </div>

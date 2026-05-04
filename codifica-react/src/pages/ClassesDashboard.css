@@ -1,0 +1,253 @@
+.classes-dashboard {
+  padding: 20px;
+  padding-top: 93px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.classes-dashboard .container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  flex: 1;
+  width: 100%;
+}
+
+.classes-header {
+  background: white;
+  padding: 30px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.classes-header h1 {
+  color: hsl(0, 0%, 5%);
+  font-size: 2.25em;
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.classes-header .subtitle {
+  color: #666;
+  font-size: 1.05em;
+  margin: 0;
+}
+
+.classes-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.summary-stat {
+  background: white;
+  padding: 20px 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.summary-stat-number {
+  font-size: 2em;
+  font-weight: 700;
+  color: hsl(252, 70%, 55%);
+}
+
+.summary-stat-label {
+  font-size: 0.9em;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.classes-school-group {
+  margin-bottom: 32px;
+}
+
+.classes-school-group-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.25em;
+  color: hsl(0, 0%, 15%);
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid hsl(35, 15%, 80%);
+}
+
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.class-card {
+  background: white;
+  border-radius: 10px;
+  padding: 22px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid hsl(252, 70%, 65%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.class-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.class-card.is-inactive {
+  border-left-color: hsl(35, 15%, 70%);
+  opacity: 0.75;
+}
+
+.class-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.class-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.class-card-title {
+  font-size: 1.35em;
+  font-weight: 700;
+  color: hsl(0, 0%, 5%);
+  margin: 0;
+}
+
+.class-card-grade {
+  font-size: 0.8em;
+  color: hsl(252, 70%, 55%);
+  background: hsl(252, 70%, 95%);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.class-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78em;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.class-card-status.status-active {
+  background: hsl(140, 50%, 94%);
+  color: hsl(140, 60%, 30%);
+}
+
+.class-card-status.status-inactive {
+  background: hsl(35, 15%, 92%);
+  color: hsl(0, 0%, 40%);
+}
+
+.class-card-meta {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.class-card-meta li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92em;
+  color: #555;
+}
+
+.class-card-teams {
+  border-top: 1px solid hsl(35, 15%, 88%);
+  padding-top: 14px;
+}
+
+.class-card-teams-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82em;
+  font-weight: 600;
+  color: hsl(0, 0%, 30%);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.class-card-teams-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.class-card-team-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: hsl(35, 25%, 96%);
+  border-radius: 6px;
+  text-decoration: none;
+  color: hsl(0, 0%, 15%);
+  transition: background 0.15s ease;
+}
+
+.class-card-team-link:hover {
+  background: hsl(252, 70%, 95%);
+}
+
+.team-link-name {
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.team-link-meta {
+  font-size: 0.82em;
+  color: #666;
+  flex: 1;
+  text-align: right;
+}
+
+.classes-empty {
+  background: white;
+  padding: 60px 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .class-card-team-link {
+    flex-wrap: wrap;
+  }
+  .team-link-meta {
+    text-align: left;
+    flex-basis: 100%;
+  }
+}

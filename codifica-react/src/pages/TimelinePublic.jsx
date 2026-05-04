@@ -46,9 +46,9 @@ function TimelinePublic() {
           <div className="english-hero-content">
             <Languages size={36} />
             <div>
-              <h2 className="english-hero-title">STEM and English can change your life</h2>
+              <h2 className="english-hero-title">Growing Opportunities Unlocking Potential</h2>
               <p className="english-hero-desc">
-                Codifica+ 2026 combines technology and English proficiency to transform the future of Brazilian students. All deliveries are in English, led by English teachers.
+                GO UP! 2026 combines technology and English proficiency to transform the future of Brazilian students. All deliveries are in English, led by English teachers.
               </p>
             </div>
           </div>

@@ -1,8 +1,8 @@
-# Codifica+ Climate Action - Sistema de Gamificação
+# GO UP! 2026 - Sistema de Gamificação
 
 ## 📋 Sobre este Protótipo
 
-Este é um protótipo completo e navegável do sistema de gamificação do programa **Codifica+ Climate Action**. O objetivo é demonstrar visualmente como badges, troféus e reconhecimentos funcionarão na prática para professores, estudantes e escolas.
+Este é um protótipo completo e navegável do sistema de gamificação do programa **GO UP! — Growing Opportunities Unlocking Potential**. O objetivo é demonstrar visualmente como badges, troféus e reconhecimentos funcionarão na prática para professores, estudantes e escolas.
 
 ## 🎯 Estrutura do Sistema
 
@@ -204,7 +204,7 @@ Este é um protótipo completo e navegável do sistema de gamificação do progr
 ## 📄 Licença e Créditos
 
 **Desenvolvido para**: Mastertech  
-**Programa**: Codifica+ Climate Action  
+**Programa**: GO UP! — Growing Opportunities Unlocking Potential  
 **Versão**: 1.0 - Mockup de Demonstração  
 **Data**: Janeiro 2025
 

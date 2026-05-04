@@ -1,6 +1,6 @@
 // Centralized data structure for the gamification system
-// Codifica+ 2026
-// Focus: STEM and English can change your life
+// GO UP! 2026
+// Focus: Growing Opportunities Unlocking Potential
 
 export const gamificationData = {
   stages: [
@@ -142,6 +142,78 @@ export const gamificationData = {
     }
   ]
 }
+
+// Enrolled classes (turmas inscritas) — origin of work teams
+// Each class belongs to a school and a teacher; teamIds reference teams in TeamDashboard / TeacherDashboard / SchoolDashboard
+export const enrolledClasses = [
+  {
+    id: 'classe-11a-joao-silva',
+    name: '11ª A',
+    grade: '11th grade',
+    school: 'E.E. Professor João Silva',
+    teacher: 'Prof. Sarah Johnson',
+    studentsCount: 28,
+    teamIds: ['ecotech-solutions', 'verde-futuro'],
+    enrolledAt: '2026-02-10',
+    status: 'active',
+  },
+  {
+    id: 'classe-10b-joao-silva',
+    name: '10ª B',
+    grade: '10th grade',
+    school: 'E.E. Professor João Silva',
+    teacher: 'Prof. Sarah Johnson',
+    studentsCount: 24,
+    teamIds: ['agua-limpa'],
+    enrolledAt: '2026-02-12',
+    status: 'active',
+  },
+  {
+    id: 'classe-12c-joao-silva',
+    name: '12ª C',
+    grade: '12th grade',
+    school: 'E.E. Professor João Silva',
+    teacher: 'Prof. Sarah Johnson',
+    studentsCount: 30,
+    teamIds: ['climatech', 'youth-sustainability'],
+    enrolledAt: '2026-02-15',
+    status: 'active',
+  },
+  {
+    id: 'classe-11a-maria-aparecida',
+    name: '11ª A',
+    grade: '11th grade',
+    school: 'E.E. Maria Aparecida',
+    teacher: 'Prof. Carlos Mendes',
+    studentsCount: 26,
+    teamIds: ['green-innovation'],
+    enrolledAt: '2026-02-09',
+    status: 'active',
+  },
+  {
+    id: 'classe-12a-maria-aparecida',
+    name: '12ª A',
+    grade: '12th grade',
+    school: 'E.E. Maria Aparecida',
+    teacher: 'Prof. Carlos Mendes',
+    studentsCount: 22,
+    teamIds: ['eco-warriors'],
+    enrolledAt: '2026-02-11',
+    status: 'inactive',
+  },
+];
+
+// Reference catalog of teams known to the system — used to resolve teamIds → display info
+// in views that don't load full team data (e.g. ClassesDashboard).
+export const teamsCatalog = {
+  'ecotech-solutions': { name: 'EcoTech Solutions', currentStage: 2, badgesCount: 8, membersCount: 5 },
+  'verde-futuro': { name: 'Verde Futuro', currentStage: 2, badgesCount: 8, membersCount: 4 },
+  'agua-limpa': { name: 'Água Limpa', currentStage: 1, badgesCount: 6, membersCount: 3 },
+  'climatech': { name: 'ClimaTech', currentStage: 2, badgesCount: 11, membersCount: 4 },
+  'youth-sustainability': { name: 'Youth Sustainability', currentStage: 1, badgesCount: 7, membersCount: 3 },
+  'green-innovation': { name: 'Green Innovation', currentStage: 2, badgesCount: 12, membersCount: 5 },
+  'eco-warriors': { name: 'Eco Warriors', currentStage: 1, badgesCount: 6, membersCount: 3 },
+};
 
 // Save data to localStorage
 export const saveGamificationData = (data) => {

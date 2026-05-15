@@ -169,6 +169,25 @@
   opacity: 0.6;
 }
 
+.backend-status {
+  font-size: 0.7rem;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-family: ui-monospace, monospace;
+  word-break: break-all;
+}
+
+.backend-status.connected {
+  background: rgba(123, 198, 126, 0.15);
+  color: #2d6a30;
+}
+
+.backend-status.mock {
+  background: rgba(245, 166, 35, 0.15);
+  color: #8a5a00;
+}
+
 .login-button {
   width: 100%;
   padding: 14px;

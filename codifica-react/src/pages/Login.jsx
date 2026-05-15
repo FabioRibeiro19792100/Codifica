@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GraduationCap, School, Settings } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
+import { BACKEND_ENABLED, BACKEND_BASE } from '../config/api'
 import './Login.css'
 
 const ROLES = [
@@ -106,6 +107,11 @@ function Login() {
 
         <div className="login-footer">
           <p>GO UP! 2026 • British Council & Mastertech</p>
+          <p className={`backend-status ${BACKEND_ENABLED ? 'connected' : 'mock'}`}>
+            {BACKEND_ENABLED
+              ? `✓ Backend connected: ${new URL(BACKEND_BASE).host}`
+              : '⚠ Backend not configured — running in mock mode (set VITE_BACKEND_BASE in Vercel)'}
+          </p>
         </div>
       </div>
     </div>

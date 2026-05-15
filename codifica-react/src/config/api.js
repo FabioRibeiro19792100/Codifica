@@ -19,6 +19,15 @@ export const BACKEND_BASE = import.meta.env.VITE_BACKEND_BASE || ''
 export const BACKEND_TOKEN = import.meta.env.VITE_BACKEND_TOKEN || ''
 export const BACKEND_ENABLED = Boolean(BACKEND_BASE)
 
+// Build-time diagnostic — visible in browser console on app load.
+if (typeof console !== 'undefined') {
+  console.info('[GO UP! backend]', {
+    enabled: BACKEND_ENABLED,
+    base: BACKEND_BASE || '(VITE_BACKEND_BASE not set in build)',
+    tokenLength: BACKEND_TOKEN ? BACKEND_TOKEN.length : 0,
+  })
+}
+
 export const backendUrl = ({ resource, ...params }) => {
   if (!BACKEND_BASE) return ''
   const qs = new URLSearchParams({ resource, ...params }).toString()

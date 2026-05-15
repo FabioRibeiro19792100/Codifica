@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { GraduationCap, Users, MapPin, School, Globe, Trophy, BarChart3, Calendar, MessageSquare, Zap, Award, Bell, Clock, AlertTriangle, CheckCircle2, Rocket, Target, Languages } from 'lucide-react'
 import { loadGamificationData } from '../data/gamificationData'
+import { useAuth } from '../contexts/AuthContext'
 import TranslationTip from '../components/TranslationTip'
 import TeamsModal from '../components/TeamsModal'
 import CalendarModal from '../components/CalendarModal'
@@ -12,7 +13,12 @@ import ReportModal from '../components/ReportModal'
 import Footer from '../components/Footer'
 import './TeacherDashboard.css'
 
+// Mock competencies still come from local computation since backend doesn't track them yet.
+const MOCK_COMPETENCIES = { stem: 70, english: 70, collaboration: 75, ods: 65 }
+const STAGE_NAMES = { 1: 'Strategic Plan', 2: 'Prototyping', 3: 'Pitch & Evaluation' }
+
 function TeacherDashboard() {
+  const { user, equipes, turmas } = useAuth()
   const [data, setData] = useState(null)
   const [isTeamsModalOpen, setIsTeamsModalOpen] = useState(false)
   const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false)
@@ -51,44 +57,27 @@ function TeacherDashboard() {
       // Calculate total badges
       const totalBadges = data.stages.reduce((sum, stage) => sum + stage.badges.length, 0)
 
-      const teacherTeams = [
-        {
-          id: "ecotech-solutions",
-          name: "EcoTech Solutions",
-          members: ["Ana Silva", "Bruno Santos", "Carla Oliveira", "Diego Costa", "Elena Ferreira"],
-          currentStage: 2,
-          badgesCount: 8,
-          status: "On track - Stage: Prototyping",
-          grade: "11th grade",
-          englishTrack: true,
-          englishTeacher: "Prof. Sarah Johnson",
-          competencies: { stem: 75, english: 82, collaboration: 90, ods: 70 }
-        },
-        {
-          id: "verde-futuro",
-          name: "Verde Futuro",
-          members: ["Fernando Lima", "Gabriela Rocha", "Henrique Alves", "Isabela Martins"],
-          currentStage: 2,
-          badgesCount: 8,
-          status: "On track - Stage: Prototyping",
-          grade: "12th grade",
-          englishTrack: true,
-          englishTeacher: "Prof. Sarah Johnson",
-          competencies: { stem: 68, english: 74, collaboration: 85, ods: 65 }
-        },
-        {
-          id: "agua-limpa",
-          name: "Água Limpa",
-          members: ["João Pedro", "Larissa Souza", "Marcos Teixeira"],
-          currentStage: 1,
-          badgesCount: 6,
-          status: "Attention - Stage: Strategic Plan",
-          grade: "10th grade",
-          englishTrack: true,
-          englishTeacher: "Prof. Sarah Johnson",
-          competencies: { stem: 55, english: 48, collaboration: 60, ods: 40 }
+      const turmaById = turmas.reduce((acc, t) => { acc[t.turma_id] = t; return acc }, {})
+
+      const teacherTeams = equipes.map((e) => {
+        const stageId = e.status?.current_stage_id ?? 1
+        const badgesCount = e.status?.earned_badge_ids?.length ?? 0
+        const stageName = STAGE_NAMES[stageId] || `Stage ${stageId}`
+        const isAttention = badgesCount < 4 && stageId === 1
+        const turma = turmaById[e.turma_id]
+        return {
+          id: e.equipe_id,
+          name: e.equipe_nome,
+          members: e.membros || [],
+          currentStage: stageId,
+          badgesCount,
+          status: `${isAttention ? 'Attention' : 'On track'} - Stage: ${stageName}`,
+          grade: turma?.turma_nome || '',
+          englishTrack: !!e.english_track,
+          englishTeacher: e.english_teacher_email || user?.name || '',
+          competencies: MOCK_COMPETENCIES,
         }
-      ]
+      })
 
   // Mock data - calendar events
   const calendarEvents = [
@@ -198,12 +187,13 @@ function TeacherDashboard() {
     }
   ]
 
-  // Consolidated competencies
+  // Consolidated competencies (guard against empty list)
+  const teamCount = teacherTeams.length || 1
   const avgCompetencies = {
-    stem: Math.round(teacherTeams.reduce((sum, t) => sum + t.competencies.stem, 0) / teacherTeams.length),
-    english: Math.round(teacherTeams.reduce((sum, t) => sum + t.competencies.english, 0) / teacherTeams.length),
-    collaboration: Math.round(teacherTeams.reduce((sum, t) => sum + t.competencies.collaboration, 0) / teacherTeams.length),
-    ods: Math.round(teacherTeams.reduce((sum, t) => sum + t.competencies.ods, 0) / teacherTeams.length),
+    stem: Math.round(teacherTeams.reduce((sum, t) => sum + t.competencies.stem, 0) / teamCount),
+    english: Math.round(teacherTeams.reduce((sum, t) => sum + t.competencies.english, 0) / teamCount),
+    collaboration: Math.round(teacherTeams.reduce((sum, t) => sum + t.competencies.collaboration, 0) / teamCount),
+    ods: Math.round(teacherTeams.reduce((sum, t) => sum + t.competencies.ods, 0) / teamCount),
   }
 
   return (
@@ -212,8 +202,8 @@ function TeacherDashboard() {
         <div className="teacher-profile">
           <div className="teacher-avatar"><GraduationCap size={40} style={{color: 'hsl(35, 25%, 92%)'}} /></div>
           <div className="teacher-info">
-            <div className="teacher-name">Prof. Sarah Johnson</div>
-            <div className="teacher-school"><MapPin size={16} style={{display: 'inline', verticalAlign: 'middle', marginRight: '4px'}} /> E.E. Professor João Silva • São Paulo, SP</div>
+            <div className="teacher-name">{user?.name || 'Teacher'}</div>
+            <div className="teacher-school"><MapPin size={16} style={{display: 'inline', verticalAlign: 'middle', marginRight: '4px'}} /> {user?.school || ''}{user?.location ? ` • ${user.location}` : ''}</div>
             <div className="teacher-role-tag">
               <Languages size={14} style={{display: 'inline', verticalAlign: 'middle', marginRight: '4px'}} />
               English Teacher — Leader
@@ -227,15 +217,15 @@ function TeacherDashboard() {
 
         <div className="stats-grid">
           <div className="stat-card clickable" onClick={() => setIsTeamsModalOpen(true)}>
-            <div className="stat-number">3</div>
+            <div className="stat-number">{teacherTeams.length}</div>
             <div className="stat-label">Teams Mentored</div>
           </div>
           <div className="stat-card clickable" onClick={() => setIsProgressModalOpen(true)}>
-            <div className="stat-number">67%</div>
+            <div className="stat-number">{teacherTeams.length === 0 ? '0%' : `${Math.round(teacherTeams.reduce((sum, team) => sum + Math.round((team.badgesCount / totalBadges) * 100), 0) / teacherTeams.length)}%`}</div>
             <div className="stat-label">Average Progress</div>
           </div>
           <div className="stat-card clickable" onClick={() => setIsStudentsModalOpen(true)}>
-            <div className="stat-number">15</div>
+            <div className="stat-number">{teacherTeams.reduce((s, t) => s + t.members.length, 0)}</div>
             <div className="stat-label">Students Impacted</div>
           </div>
         </div>
@@ -520,7 +510,7 @@ function TeacherDashboard() {
                 <div>
                   <p><strong>Total Teams:</strong> {teacherTeams.length}</p>
                   <p><strong>Total Students:</strong> {teacherTeams.reduce((sum, team) => sum + team.members.length, 0)}</p>
-                  <p><strong>Average Progress:</strong> 67%</p>
+                  <p><strong>Average Progress:</strong> {teacherTeams.length === 0 ? '0%' : `${Math.round(teacherTeams.reduce((sum, team) => sum + Math.round((team.badgesCount / totalBadges) * 100), 0) / teacherTeams.length)}%`}</p>
                   <p><strong>Track:</strong> 100% English Track</p>
                 </div>
               )

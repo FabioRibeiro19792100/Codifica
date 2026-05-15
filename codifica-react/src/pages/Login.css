@@ -138,6 +138,37 @@
   line-height: 1.4;
 }
 
+.login-email-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.login-email-field label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.login-email-field input {
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  background: hsl(35, 25%, 96%);
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.login-email-field input:focus {
+  outline: none;
+  border-color: hsl(0, 0%, 5%);
+}
+
+.login-email-field small {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
 .login-button {
   width: 100%;
   padding: 14px;

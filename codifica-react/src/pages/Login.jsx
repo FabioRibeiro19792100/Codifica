@@ -27,16 +27,24 @@ const ROLES = [
 
 function Login() {
   const [selectedRole, setSelectedRole] = useState(null)
-  const { login, getDefaultRoute } = useAuth()
+  const [email, setEmail] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const { login } = useAuth()
   const navigate = useNavigate()
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!selectedRole) return
-    login(selectedRole)
-    const route = selectedRole === 'professor' ? '/teacher'
-      : selectedRole === 'gestor' ? '/school'
-      : '/admin'
-    navigate(route)
+    setSubmitting(true)
+    try {
+      const overrides = selectedRole === 'professor' && email.trim() ? { email: email.trim().toLowerCase() } : {}
+      await login(selectedRole, overrides)
+      const route = selectedRole === 'professor' ? '/teacher'
+        : selectedRole === 'gestor' ? '/school'
+        : '/admin'
+      navigate(route)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -72,12 +80,27 @@ function Login() {
             })}
           </div>
 
+          {selectedRole === 'professor' && (
+            <div className="login-email-field">
+              <label htmlFor="login-email">Your registration email (optional)</label>
+              <input
+                id="login-email"
+                type="email"
+                placeholder="sarah@etec.sp.gov.br"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+              />
+              <small>Used to load your enrolled classes from the backend. Leave blank to use mock data.</small>
+            </div>
+          )}
+
           <button
             className="login-button"
-            disabled={!selectedRole}
+            disabled={!selectedRole || submitting}
             onClick={handleLogin}
           >
-            Enter
+            {submitting ? 'Loading…' : 'Enter'}
           </button>
         </div>
 

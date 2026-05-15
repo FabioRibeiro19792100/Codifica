@@ -5,17 +5,66 @@ import { enrolledClasses, teamsCatalog } from '../data/gamificationData'
 import Footer from '../components/Footer'
 import './ClassesDashboard.css'
 
+// Normalizes a backend turma + its equipes into the same shape ClassesDashboard rendered before.
+function turmaToClassView(turma, equipesForTurma) {
+  return {
+    id: turma.turma_id,
+    name: turma.turma_nome,
+    grade: turma.etec_numero ? `ETEC ${turma.etec_numero}` : '',
+    school: turma.etec_nome || '',
+    teacher: turma.professor_lead_nome || '',
+    studentsCount: turma.students_count_estimate || 0,
+    status: turma.status || 'active',
+    teams: equipesForTurma.map((e) => ({
+      id: e.equipe_id,
+      name: e.equipe_nome,
+      currentStage: e.status?.current_stage_id ?? '?',
+      badgesCount: e.status?.earned_badge_ids?.length ?? 0,
+      membersCount: Array.isArray(e.membros) ? e.membros.length : 0,
+    })),
+  }
+}
+
+// Mock-fallback shape (preserves old gestor/admin views until backend covers those roles).
+function mockClassToView(cls) {
+  return {
+    id: cls.id,
+    name: cls.name,
+    grade: cls.grade,
+    school: cls.school,
+    teacher: cls.teacher,
+    studentsCount: cls.studentsCount,
+    status: cls.status,
+    teams: cls.teamIds.map((id) => ({
+      id,
+      ...(teamsCatalog[id] || { name: id, currentStage: '?', badgesCount: 0, membersCount: 0 }),
+    })),
+  }
+}
+
 function ClassesDashboard() {
-  const { user } = useAuth()
+  const { user, turmas, equipes } = useAuth()
 
   if (!user) return null
 
-  const visibleClasses = enrolledClasses.filter((cls) => {
-    if (user.role === 'admin') return true
-    if (user.role === 'gestor') return cls.school === user.school
-    if (user.role === 'professor') return cls.teacher === user.name
-    return false
-  })
+  let visibleClasses
+  if (user.role === 'professor' && turmas.length > 0) {
+    const equipesByTurma = equipes.reduce((acc, e) => {
+      acc[e.turma_id] = acc[e.turma_id] || []
+      acc[e.turma_id].push(e)
+      return acc
+    }, {})
+    visibleClasses = turmas.map((t) => turmaToClassView(t, equipesByTurma[t.turma_id] || []))
+  } else {
+    visibleClasses = enrolledClasses
+      .filter((cls) => {
+        if (user.role === 'admin') return true
+        if (user.role === 'gestor') return cls.school === user.school
+        if (user.role === 'professor') return cls.teacher === user.name
+        return false
+      })
+      .map(mockClassToView)
+  }
 
   const headerCopy = (() => {
     if (user.role === 'professor') {
@@ -44,39 +93,36 @@ function ClassesDashboard() {
       }, {})
     : null
 
-  const renderClassCard = (cls) => {
-    const teams = cls.teamIds.map((id) => ({
-      id,
-      ...(teamsCatalog[id] || { name: id, currentStage: '?', badgesCount: 0, membersCount: 0 }),
-    }))
+  const renderClassCard = (cls) => (
+    <article key={cls.id} className={`class-card ${cls.status === 'inactive' ? 'is-inactive' : ''}`}>
+      <header className="class-card-header">
+        <div className="class-card-title-row">
+          <BookOpen size={22} />
+          <h3 className="class-card-title">{cls.name}</h3>
+          {cls.grade && <span className="class-card-grade">{cls.grade}</span>}
+        </div>
+        <span className={`class-card-status status-${cls.status}`}>
+          <CircleDot size={12} />
+          {cls.status === 'active' ? 'Active' : 'Inactive'}
+        </span>
+      </header>
 
-    return (
-      <article key={cls.id} className={`class-card ${cls.status === 'inactive' ? 'is-inactive' : ''}`}>
-        <header className="class-card-header">
-          <div className="class-card-title-row">
-            <BookOpen size={22} />
-            <h3 className="class-card-title">{cls.name}</h3>
-            <span className="class-card-grade">{cls.grade}</span>
-          </div>
-          <span className={`class-card-status status-${cls.status}`}>
-            <CircleDot size={12} />
-            {cls.status === 'active' ? 'Active' : 'Inactive'}
-          </span>
-        </header>
+      <ul className="class-card-meta">
+        {cls.school && <li><School size={14} /> {cls.school}</li>}
+        {cls.teacher && <li><GraduationCap size={14} /> {cls.teacher}</li>}
+        <li><Users size={14} /> {cls.studentsCount} students</li>
+      </ul>
 
-        <ul className="class-card-meta">
-          <li><School size={14} /> {cls.school}</li>
-          <li><GraduationCap size={14} /> {cls.teacher}</li>
-          <li><Users size={14} /> {cls.studentsCount} students</li>
-        </ul>
-
-        <div className="class-card-teams">
-          <div className="class-card-teams-label">
-            <Trophy size={14} />
-            <span>Work teams ({teams.length})</span>
-          </div>
+      <div className="class-card-teams">
+        <div className="class-card-teams-label">
+          <Trophy size={14} />
+          <span>Work teams ({cls.teams.length})</span>
+        </div>
+        {cls.teams.length === 0 ? (
+          <p className="class-card-teams-empty">No teams formed yet.</p>
+        ) : (
           <ul className="class-card-teams-list">
-            {teams.map((team) => (
+            {cls.teams.map((team) => (
               <li key={team.id}>
                 <Link to={`/team/${team.id}`} className="class-card-team-link">
                   <span className="team-link-name">{team.name}</span>
@@ -88,10 +134,10 @@ function ClassesDashboard() {
               </li>
             ))}
           </ul>
-        </div>
-      </article>
-    )
-  }
+        )}
+      </div>
+    </article>
+  )
 
   return (
     <div className="classes-dashboard">
@@ -108,7 +154,7 @@ function ClassesDashboard() {
           </div>
           <div className="summary-stat">
             <span className="summary-stat-number">
-              {visibleClasses.reduce((s, c) => s + c.teamIds.length, 0)}
+              {visibleClasses.reduce((s, c) => s + c.teams.length, 0)}
             </span>
             <span className="summary-stat-label">Work teams formed</span>
           </div>
